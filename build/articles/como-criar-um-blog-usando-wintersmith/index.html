@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width">
+    <title>Como criar um blog utilizando Wintersmith - O Que Aprendi Hoje
+    </title>
+    <link rel="alternate" href="http://oqueaprendihoje.com.br/feed.xml" type="application/rss+xml" title="A saga de um aprendiz encantado com o universo do Front-end">
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic|Anonymous+Pro:400,700,400italic,700italic|Merriweather:400,700,300">
+    <link rel="stylesheet" href="/css/main.css">
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+      
+      ga('create', 'UA-41535019-1', 'oqueaprendihoje.com.br');
+      ga('send', 'pageview');
+    </script>
+  </head>
+  <body class="article-detail">
+    <header class="header">
+      <div class="content-wrap">
+        <h1>Como criar um blog utilizando Wintersmith</h1>
+        <p class="author">Escrito por <span class="author"><a target="_blank" href="//twitter.com/_joaofelix">João Felix</a></span>
+        </p>
+      </div>
+    </header>
+    <div id="content">
+      <div class="content-wrap">
+        <article class="article">
+          <section class="content"><p>Já que o objetivo é compartilhar o aprendizado de todo dia, o primeiro artigo será sobre a minha descoberta dos geradores de conteúdos&nbsp;estáticos.</p>
+<p><span class="more"></span></p>
+<h3>A&nbsp;Vontade</h3>
+<p>A pouco tempo atrás, acompanhando o <a href="http://zofe.com.br/posts/zofe-6-o-que-voce-fez-hoje/">Zofe 6</a>, começei a dar atenção aos geradores de conteúdos estáticos como alternativa facilitadora ao desenvolvimento de sites que não necessitassem de paineis adiministrativos e etc., o que se encaixam nos padrões dos meus sites&nbsp;pessoais.</p>
+<h3>O que são os Geradores de Conteúdos Estáticos? (O que eu&nbsp;entendi)</h3>
+<p>Diferente de plataformas como Wordpress, Joomla e etc., os geradores de conteúdo estáticos servem para criar páginas de conteúdo sem a utilização de qualquer persistência ou dependência server-side, onde ao final, você possui um pacote de arquivos html e seus companheiros&nbsp;(css,javascript,imagens…).</p>
+<h3>O <a href="http://wintersmith.io/">Wintersmith</a> <a href="https://github.com/jnordberg/wintersmith">(código)</a></h3>
+<p>O porto de partida foi a escolha de qual gerador utilizar. Eu já possuia uma queda pelo <a href="http://jekyllrb.com/">Jekyll</a> (devido à diversos blogs que eu acompanho o utilizarem) e uma lista de <a href="https://iwantmyname.com/blog/2011/02/list-static-website-generators.html">32 Geradores de Conteúdo Estáticos</a>, porem, eu não queria utilizar <a href="http://www.ruby-lang.org/">Ruby</a> (simplesmente não queria) e decidi procurar algo em <a href="http://nodejs.org/">Node.js</a>, eis que surge o <a href="http://wintersmith.io/">Wintersmith</a>!</p>
+<p>O projeto <a href="http://wintersmith.io/">Wintersmith</a> <span class="caps">MIT</span>; É open-source e utiliza outros projetos open-source para criar um ambiente bem simples! Foi criado utilizando o <a href="http://daringfireball.net/projects/markdown/">Markdown</a> como conversor de texto para <span class="caps">HTML</span>, <a href="https://github.com/visionmedia/jade">Jade</a> para criação de templates e <a href="http://coffeescript.org/">Coffescript</a> para os plugins! (Muita coisa legal para&nbsp;aprender!!)</p>
+<h3>Instalando o <a href="http://wintersmith.io/">Wintersmith</a></h3>
+<p>Neste artigo eu vou adotar como precedência que você já tenha o <a href="http://nodejs.org/">Node.js</a> instalado e saiba do que se trata o <a href="https://npmjs.org/">npm</a>, mas nada impede de aprendermos mais sobre eles em um outro momento; Segue o comando de&nbsp;instalação:</p>
+<pre><code>$ npm install wintersmith -g</code></pre>
+<h3>Criando o&nbsp;projeto</h3>
+<p>Estando com o pacote instalado, basta criar o seu projeto na pasta que&nbsp;desejar. </p>
+<pre><code>$ wintersmith new &lt;path&gt;</code></pre>
+<p>O template padrão do projeto é o de blog (existem também basic e webapp), o que atende bem à minha necessidade, mas você pode criar outros. Junto com a estrutura de arquivos, o <a href="http://wintersmith.io/">Wintersmith</a> já criará um conjunto de artigos bem explicativos que mostram o potencial da ferramenta, para visualizar como está o seu projeto, basta coloca-lo em&nbsp;peview:</p>
+<pre><code>$ cd &lt;path&gt;
+$ wintersmith preview</code></pre>
+<p>Ai pronto! Você já pode acessar <a href="http://localhost:8080">http://localhost:8080</a> e ver o que está criado (Vale lembrar que enquanto estiver visualizando, qualquer alteração é refletida na pré-visualização sem a necessidade de executar o comando&nbsp;novamente).</p>
+<h3>Personalizando o&nbsp;blog</h3>
+<p>Como a estrutura criada pelo projeto já é bem próxima à de um blog bem enxuto, precisei apenas fazer algumas mudanças de parametros, alterar os autores (dos artigos, claro!) e criar um template jade para os comentários (utilizando <a href="http://disqus.com/">Disqus</a>).</p>
+<p>Na raiz do projeto existe um arquivo chamado config.json e o padrão dele&nbsp;é:</p>
+<pre><code class="lang-json">{
+  "<span class="attribute">locals</span>": <span class="value">{
+    "<span class="attribute">url</span>": <span class="value"><span class="string">"http://localhost:8080"</span></span>,
+    "<span class="attribute">name</span>": <span class="value"><span class="string">"The Wintersmith's blog"</span></span>,
+    "<span class="attribute">owner</span>": <span class="value"><span class="string">"Someone"</span></span>,
+    "<span class="attribute">description</span>": <span class="value"><span class="string">"Ramblings of an immor(t)al demigod"</span>
+  }</span></span>,
+  "<span class="attribute">plugins</span>": <span class="value">[
+    <span class="string">"./plugins/paginator.coffee"</span>
+  ]</span>,
+  "<span class="attribute">require</span>": <span class="value">{
+    "<span class="attribute">moment</span>": <span class="value"><span class="string">"moment"</span></span>,
+    "<span class="attribute">_</span>": <span class="value"><span class="string">"underscore"</span></span>,
+    "<span class="attribute">typogr</span>": <span class="value"><span class="string">"typogr"</span>
+  }</span></span>,
+  "<span class="attribute">jade</span>": <span class="value">{
+    "<span class="attribute">pretty</span>": <span class="value"><span class="literal">true</span>
+  }</span></span>,
+  "<span class="attribute">markdown</span>": <span class="value">{
+    "<span class="attribute">smartLists</span>": <span class="value"><span class="literal">true</span></span>,
+    "<span class="attribute">smartypants</span>": <span class="value"><span class="literal">true</span>
+  }</span></span>,
+  "<span class="attribute">paginator</span>": <span class="value">{
+    "<span class="attribute">perPage</span>": <span class="value"><span class="number">3</span>
+  }</span>
+}</span></code></pre>
+<p>E após as minhas alterações, eu o deixei&nbsp;assim:</p>
+<pre><code class="lang-json">{
+  "<span class="attribute">locals</span>": <span class="value">{
+    "<span class="attribute">url</span>": <span class="value"><span class="string">"http://oqueaprendihoje.com.br"</span></span>,
+    "<span class="attribute">name</span>": <span class="value"><span class="string">"O Que Aprendi Hoje"</span></span>,
+    "<span class="attribute">owner</span>": <span class="value"><span class="string">"João Felix"</span></span>,
+    "<span class="attribute">description</span>": <span class="value"><span class="string">"A saga de um aprendiz encantado com o universo do Front-end"</span></span>,
+    "<span class="attribute">keywords</span>" : <span class="value">[<span class="string">"javascript"</span>,<span class="string">"css"</span>,<span class="string">"front-end"</span>,<span class="string">"web"</span>,<span class="string">"development"</span>]</span>,
+    "<span class="attribute">disqus</span>": <span class="value">{
+      "<span class="attribute">id</span>" : <span class="value"><span class="string">"oqueaprendihoje"</span>
+    }</span>
+  }</span></span>,
+  "<span class="attribute">plugins</span>": <span class="value">[
+    <span class="string">"./plugins/paginator.coffee"</span>
+  ]</span>,
+  "<span class="attribute">require</span>": <span class="value">{
+    "<span class="attribute">moment</span>": <span class="value"><span class="string">"moment"</span></span>,
+    "<span class="attribute">_</span>": <span class="value"><span class="string">"underscore"</span></span>,
+    "<span class="attribute">typogr</span>": <span class="value"><span class="string">"typogr"</span>
+  }</span></span>,
+  "<span class="attribute">jade</span>": <span class="value">{
+    "<span class="attribute">pretty</span>": <span class="value"><span class="literal">true</span>
+  }</span></span>,
+  "<span class="attribute">markdown</span>": <span class="value">{
+    "<span class="attribute">smartLists</span>": <span class="value"><span class="literal">true</span></span>,
+    "<span class="attribute">smartypants</span>": <span class="value"><span class="literal">true</span>
+  }</span></span>,
+  "<span class="attribute">paginator</span>": <span class="value">{
+    "<span class="attribute">perPage</span>": <span class="value"><span class="number">10</span>
+  }</span>
+}</span></code></pre>
+<p>Basicamente alterei as propriedades do blog, como nome, proprietário, descrição e palavras-chaves, alem de alterar o número de paginas e inserir o objeto “disqus” para utilizarmos no controle de comentários; Vale ressaltar que o objeto “locals” fica acessivel aos templates&nbsp;também.</p>
+<p>Outra alteração necessária foi a criação de um autor, para isso, removi os autores padrões e adicionei o meu na pasta “contents/authors”; O identificador de autor no artigo é o nome do arquivo e o conteúdo é um objeto&nbsp;<span class="caps">JSON</span>:</p>
+<pre><code class="lang-json">{
+    "<span class="attribute">name</span>":   <span class="value"><span class="string">"João Felix"</span></span>,
+    "<span class="attribute">email</span>":  <span class="value"><span class="string">"jr8116[at]gmail[dot]com"</span></span>,
+    "<span class="attribute">bio</span>":    <span class="value"><span class="string">"Aprendiz, desenvolvedor e empreendedor!"</span>
+}</span></code></pre>
+<h3>Comentários nos&nbsp;artigos</h3>
+<p>Todo blog que se preze, precisa aceitar comentários. Para isso, utilizei a solução <a href="http://disqus.com/">Disqus</a>, que me permite apenas pela referência do utilizador e da página atual, disponibilizar para os usuários uma forma de comentar os&nbsp;artigos.</p>
+<p>Para manter o padrão de organização do projeto, eu criei um <a href="https://github.com/visionmedia/jade">template jade</a> chamado &#39;disqus.jade“ e o coloquei na pasta ”templates&quot; (Também o dinamizei para utilizar o id do objeto disqus que determinamos); Este arquivo nada mais é do que a transposição do código fornecido pelo <a href="http://disqus.com/">Disqus</a>:</p>
+<pre><code class="lang-xml">    <span class="tag">&lt;<span class="title">div</span> <span class="attribute">id</span>=<span class="value">"disqus_thread"</span>&gt;</span><span class="tag">&lt;/<span class="title">div</span>&gt;</span>
+    <span class="tag">&lt;<span class="title">script</span> <span class="attribute">type</span>=<span class="value">"text/javascript"</span>&gt;</span><span class="javascript">
+        <span class="keyword">var</span> disqus_shortname = <span class="string">'oqueaprendihoje'</span>; 
+        (<span class="keyword">function</span>() {
+            <span class="keyword">var</span> dsq = document.createElement(<span class="string">'script'</span>); dsq.type = <span class="string">'text/javascript'</span>; dsq.async = <span class="literal">true</span>;
+            dsq.src = <span class="string">'//'</span> + disqus_shortname + <span class="string">'.disqus.com/embed.js'</span>;
+            (document.getElementsByTagName(<span class="string">'head'</span>)[<span class="number">0</span>] || document.getElementsByTagName(<span class="string">'body'</span>)[<span class="number">0</span>]).appendChild(dsq);
+        })();
+    </span><span class="tag">&lt;/<span class="title">script</span>&gt;</span>
+    <span class="tag">&lt;<span class="title">noscript</span>&gt;</span>Please enable JavaScript to view the <span class="tag">&lt;<span class="title">a</span> <span class="attribute">href</span>=<span class="value">"http://disqus.com/?ref_noscript"</span>&gt;</span>comments powered by Disqus.<span class="tag">&lt;/<span class="title">a</span>&gt;</span><span class="tag">&lt;/<span class="title">noscript</span>&gt;</span>
+    <span class="tag">&lt;<span class="title">a</span> <span class="attribute">href</span>=<span class="value">"http://disqus.com"</span> <span class="attribute">class</span>=<span class="value">"dsq-brlink"</span>&gt;</span>comments powered by <span class="tag">&lt;<span class="title">span</span> <span class="attribute">class</span>=<span class="value">"logo-disqus"</span>&gt;</span>Disqus<span class="tag">&lt;/<span class="title">span</span>&gt;</span><span class="tag">&lt;/<span class="title">a</span>&gt;</span></code></pre>
+<p>Para o padrão de escrita <a href="https://github.com/visionmedia/jade">Jade</a>:</p>
+<pre><code class="lang-python">div(id=<span class="string">"disqus_thread"</span>)
+script.
+       var disqus_shortname = <span class="string">"#{disqus.id}"</span>;
+        (function() {
+            var dsq = document.createElement(<span class="string">'script'</span>); dsq.type = <span class="string">'text/javascript'</span>; dsq.async = true;
+            dsq.src = <span class="string">'//'</span> + disqus_shortname + <span class="string">'.disqus.com/embed.js'</span>;
+            (document.getElementsByTagName(<span class="string">'head'</span>)[<span class="number">0</span>] || document.getElementsByTagName(<span class="string">'body'</span>)[<span class="number">0</span>]).appendChild(dsq);
+        })();
+noscript
+    Habilite o Javascript do seu browser para ver os
+    a(href=<span class="string">"http://disqus.com/?ref_noscript"</span>) comentários mantidos pelo Disqus.
+a.dsq-brlink(href=<span class="string">"http://disqus.com"</span>)
+    comments powered by
+    span.logo-disqus
+        Disqus</code></pre>
+<p>(Este foi meu primeiro contato com o <a href="https://github.com/visionmedia/jade">Jade Template</a>, acredito que em breve escreverei sobre um aprendizado mais&nbsp;aprofundado)</p>
+<p>Com o template pronto, basta inclui-lo no template “article.jade” que também está no diretório&nbsp;“templates”:</p>
+<pre><code class="lang-python">  include disqus</code></pre>
+<p>Resultado final do&nbsp;template:</p>
+<pre><code class="lang-python">extends layout
+
+block append vars
+  - bodyclass = <span class="string">'article-detail'</span>
+
+block prepend title
+  | <span class="comment">#{ page.title + " - "}</span>
+
+block header
+  include author
+  h1= page.title
+  p.author
+    | <span class="comment">#{ "Escrito por " }</span>
+    mixin author(page.metadata.author)
+
+block content
+  article.article
+    section.content!= typogr(page.html).typogrify()
+
+
+block prepend footer
+  include disqus
+  div.nav
+    a(href=contents.index.url) « Lista</code></pre>
+<p>Também fiz algumas alterações por menores, como: Exibir o Twitter e não o E-mail do autor, links para compartilhamento utilizando o <a href="http://www.addthis.com/">Addthis</a>, inserção do <a href="https://www.google.com/analytics/">Google Analytics</a> e tradução dos links de avançar, ver mais e etc. que estão disponíveis no código fonte do&nbsp;blog.</p>
+<h3>Publicando</h3>
+<p>Pronto! Nossa estrutura de blog está criada! Agora falta apenas gerar os arquivos finais para a publicação, que estarão disponíveis na pasta&nbsp;“build”:</p>
+<pre><code>$ wintersmith build</code></pre>
+<h3>Acabamos!</h3>
+<p> Neste momento, temos um blog pronto, porem, sem customização e apenas com o layout padrão do <a href="http://wintersmith.io/">Wintersmith</a>. Provavelmente no artigo de amanhã eu falarei sobre a customização visual do <a href="http://wintersmith.io/">Wintersmith</a>, onde pretendo utilizar o <a href="http://purecss.io/">Pure.css</a>. Espero que tenham gostado do artigo e agradeço qualquer crítica, elogio ou comentário! Espero continuar com novos conteúdos e conto com a colaboração de todos! Até&nbsp;breve!</p>
+<p>Todo o código está disponível no Github: <a href="https://github.com/jr8116/oqueaprendihoje"><a href="https://github.com/jr8116/oqueaprendihoje">https://github.com/jr8116/oqueaprendihoje</a></a></p>
+</section>
+        </article>
+      </div>
+    </div>
+    <footer>
+      <div class="content-wrap">
+        <div class="addthis_toolbox addthis_default_style"><a fb:like:layout="button_count" class="addthis_button_facebook_like"></a><a class="addthis_button_tweet"></a><a class="addthis_counter addthis_pill_style"></a>
+          <script>var addthis_config = {"data_track_addressbar":true};</script>
+          <script src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-50f7680d30aa565f"></script>
+        </div>
+        <div id="disqus_thread"></div>
+        <script>
+          var disqus_shortname = "oqueaprendihoje";
+           (function() {
+               var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+               dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+               (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+           })();
+        </script>
+        <noscript>
+          <Habilite>o Javascript do seu browser para ver os</Habilite><a href="http://disqus.com/?ref_noscript">comentários mantidos pelo Disqus.</a>
+        </noscript><a href="http://disqus.com" class="dsq-brlink">
+          <comments>powered by</comments><span class="logo-disqus">
+            <Disqus></Disqus></span></a>
+        <div class="nav"><a href="/">« Lista</a></div>
+        <section class="about"><p>O objetivo deste blog é apenas devolver à internet um pouco do que aprendi com ela.</p>
+<p>Gostaria de se juntar a mim ou ver algum conteúdo especifico neste blog? Entre em <a href="mailto:jr8116@gmail.com">contato</a>, deixe comentários ou me ache no <a href="http://twitter.com/_joaofelix">twitter</a>!</p>
+
+        </section>
+        <section class="copy">
+          <p>&copy; 2013<a href="//twitter.com/_joaofelix" target="_blank"> João Felix</a>&mdash; powered by&nbsp;<a href="https://github.com/jnordberg/wintersmith">Wintersmith</a></p>
+        </section>
+      </div>
+    </footer>
+  </body>
+</html>

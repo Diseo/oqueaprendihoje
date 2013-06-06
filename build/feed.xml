@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<rss version="2.0" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:wfw="http://wellformedweb.org/CommentAPI/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>O Que Aprendi Hoje</title>
+    <atom:link href="http://oqueaprendihoje.com.br/feed.xml" rel="self" type="application/rss+xml"></atom:link>
+    <link>http://oqueaprendihoje.com.br</link>
+    <description>A saga de um aprendiz encantado com o universo do Front-end</description>
+    <pubDate>Thu, 06 Jun 2013 10:00:00 -0300</pubDate>
+    <generator>Wintersmith - https://github.com/jnordberg/wintersmith</generator>
+    <language>en</language>
+    <item>
+      <title>Como criar um blog utilizando Wintersmith</title>
+      <link>http://oqueaprendihoje.com.br/articles/como-criar-um-blog-usando-wintersmith/</link>
+      <pubDate>Thu, 06 Jun 2013 10:00:00 -0300</pubDate>
+      <guid isPermaLink="true">http://oqueaprendihoje.com.br/articles/como-criar-um-blog-usando-wintersmith/</guid>
+      <author></author>
+      <description>&lt;p&gt;Já que o objetivo é compartilhar o aprendizado de todo dia, o primeiro artigo será sobre a minha descoberta dos geradores de conteúdos estáticos.&lt;/p&gt;
+&lt;p&gt;&lt;span class=&quot;more&quot;&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;h3&gt;A Vontade&lt;/h3&gt;
+&lt;p&gt;A pouco tempo atrás, acompanhando o &lt;a href=&quot;http://zofe.com.br/posts/zofe-6-o-que-voce-fez-hoje/&quot;&gt;Zofe 6&lt;/a&gt;, começei a dar atenção aos geradores de conteúdos estáticos como alternativa facilitadora ao desenvolvimento de sites que não necessitassem de paineis adiministrativos e etc., o que se encaixam nos padrões dos meus sites pessoais.&lt;/p&gt;
+&lt;h3&gt;O que são os Geradores de Conteúdos Estáticos? (O que eu entendi)&lt;/h3&gt;
+&lt;p&gt;Diferente de plataformas como Wordpress, Joomla e etc., os geradores de conteúdo estáticos servem para criar páginas de conteúdo sem a utilização de qualquer persistência ou dependência server-side, onde ao final, você possui um pacote de arquivos html e seus companheiros (css,javascript,imagens…).&lt;/p&gt;
+&lt;h3&gt;O &lt;a href=&quot;http://wintersmith.io/&quot;&gt;Wintersmith&lt;/a&gt; &lt;a href=&quot;https://github.com/jnordberg/wintersmith&quot;&gt;(código)&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;O porto de partida foi a escolha de qual gerador utilizar. Eu já possuia uma queda pelo &lt;a href=&quot;http://jekyllrb.com/&quot;&gt;Jekyll&lt;/a&gt; (devido à diversos blogs que eu acompanho o utilizarem) e uma lista de &lt;a href=&quot;https://iwantmyname.com/blog/2011/02/list-static-website-generators.html&quot;&gt;32 Geradores de Conteúdo Estáticos&lt;/a&gt;, porem, eu não queria utilizar &lt;a href=&quot;http://www.ruby-lang.org/&quot;&gt;Ruby&lt;/a&gt; (simplesmente não queria) e decidi procurar algo em &lt;a href=&quot;http://nodejs.org/&quot;&gt;Node.js&lt;/a&gt;, eis que surge o &lt;a href=&quot;http://wintersmith.io/&quot;&gt;Wintersmith&lt;/a&gt;!&lt;/p&gt;
+&lt;p&gt;O projeto &lt;a href=&quot;http://wintersmith.io/&quot;&gt;Wintersmith&lt;/a&gt; MIT; É open-source e utiliza outros projetos open-source para criar um ambiente bem simples! Foi criado utilizando o &lt;a href=&quot;http://daringfireball.net/projects/markdown/&quot;&gt;Markdown&lt;/a&gt; como conversor de texto para HTML, &lt;a href=&quot;https://github.com/visionmedia/jade&quot;&gt;Jade&lt;/a&gt; para criação de templates e &lt;a href=&quot;http://coffeescript.org/&quot;&gt;Coffescript&lt;/a&gt; para os plugins! (Muita coisa legal para aprender!!)&lt;/p&gt;
+&lt;h3&gt;Instalando o &lt;a href=&quot;http://wintersmith.io/&quot;&gt;Wintersmith&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;Neste artigo eu vou adotar como precedência que você já tenha o &lt;a href=&quot;http://nodejs.org/&quot;&gt;Node.js&lt;/a&gt; instalado e saiba do que se trata o &lt;a href=&quot;https://npmjs.org/&quot;&gt;npm&lt;/a&gt;, mas nada impede de aprendermos mais sobre eles em um outro momento; Segue o comando de instalação:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;$ npm install wintersmith -g&lt;/code&gt;&lt;/pre&gt;
+&lt;h3&gt;Criando o projeto&lt;/h3&gt;
+&lt;p&gt;Estando com o pacote instalado, basta criar o seu projeto na pasta que desejar. &lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;$ wintersmith new &amp;lt;path&amp;gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;O template padrão do projeto é o de blog (existem também basic e webapp), o que atende bem à minha necessidade, mas você pode criar outros. Junto com a estrutura de arquivos, o &lt;a href=&quot;http://wintersmith.io/&quot;&gt;Wintersmith&lt;/a&gt; já criará um conjunto de artigos bem explicativos que mostram o potencial da ferramenta, para visualizar como está o seu projeto, basta coloca-lo em peview:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;$ cd &amp;lt;path&amp;gt;
+$ wintersmith preview&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Ai pronto! Você já pode acessar &lt;a href=&quot;http://localhost:8080&quot;&gt;http://localhost:8080&lt;/a&gt; e ver o que está criado (Vale lembrar que enquanto estiver visualizando, qualquer alteração é refletida na pré-visualização sem a necessidade de executar o comando novamente).&lt;/p&gt;
+&lt;h3&gt;Personalizando o blog&lt;/h3&gt;
+&lt;p&gt;Como a estrutura criada pelo projeto já é bem próxima à de um blog bem enxuto, precisei apenas fazer algumas mudanças de parametros, alterar os autores (dos artigos, claro!) e criar um template jade para os comentários (utilizando &lt;a href=&quot;http://disqus.com/&quot;&gt;Disqus&lt;/a&gt;).&lt;/p&gt;
+&lt;p&gt;Na raiz do projeto existe um arquivo chamado config.json e o padrão dele é:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;lang-json&quot;&gt;{
+  &quot;&lt;span class=&quot;attribute&quot;&gt;locals&lt;/span&gt;&quot;: &lt;span class=&quot;value&quot;&gt;{
+    &quot;&lt;span class=&quot;attribute&quot;&gt;url&lt;/span&gt;&quot;: &lt;span class=&quot;value&quot;&gt;&lt;span class=&quot;string&quot;&gt;&quot;http://localhost:8080&quot;&lt;/span&gt;&lt;/span&gt;,
+    &quot;&lt;span class=&quot;attribute&quot;&gt;name&lt;/span&gt;&quot;: &lt;span class=&quot;value&quot;&gt;&lt;span class=&quot;string&quot;&gt;&quot;The Wintersmith's blog&quot;&lt;/span&gt;&lt;/span&gt;,
+    &quot;&lt;span class=&quot;attribute&quot;&gt;owner&lt;/span&gt;&quot;: &lt;span class=&quot;value&quot;&gt;&lt;span class=&quot;string&quot;&gt;&quot;Someone&quot;&lt;/span&gt;&lt;/span&gt;,
+    &quot;&lt;span class=&quot;attribute&quot;&gt;description&lt;/span&gt;&quot;: &lt;span class=&quot;value&quot;&gt;&lt;span class=&quot;string&quot;&gt;&quot;Ramblings of an immor(t)al demigod&quot;&lt;/span&gt;
+  }&lt;/span&gt;&lt;/span&gt;,
+  &quot;&lt;span class=&quot;attribute&quot;&gt;plugins&lt;/span&gt;&quot;: &lt;span class=&quot;value&quot;&gt;[
+    &lt;span class=&quot;string&quot;&gt;&quot;./plugins/paginator.coffee&quot;&lt;/span&gt;
+  ]&lt;/span&gt;,
+  &quot;&lt;span class=&quot;attribute&quot;&gt;require&lt;/span&gt;&quot;: &lt;span class=&quot;value&quot;&gt;{
+    &quot;&lt;span class=&quot;attribute&quot;&gt;moment&lt;/span&gt;&quot;: &lt;span class=&quot;value&quot;&gt;&lt;span class=&quot;string&quot;&gt;&quot;moment&quot;&lt;/span&gt;&lt;/span&gt;,
+    &quot;&lt;span class=&quot;attribute&quot;&gt;_&lt;/span&gt;&quot;: &lt;span class=&quot;value&quot;&gt;&lt;span class=&quot;string&quot;&gt;&quot;underscore&quot;&lt;/span&gt;&lt;/span&gt;,
+    &quot;&lt;span class=&quot;attribute&quot;&gt;typogr&lt;/span&gt;&quot;: &lt;span class=&quot;value&quot;&gt;&lt;span class=&quot;string&quot;&gt;&quot;typogr&quot;&lt;/span&gt;
+  }&lt;/span&gt;&lt;/span&gt;,
+  &quot;&lt;span class=&quot;attribute&quot;&gt;jade&lt;/span&gt;&quot;: &lt;span class=&quot;value&quot;&gt;{
+    &quot;&lt;span class=&quot;attribute&quot;&gt;pretty&lt;/span&gt;&quot;: &lt;span class=&quot;value&quot;&gt;&lt;span class=&quot;literal&quot;&gt;true&lt;/span&gt;
+  }&lt;/span&gt;&lt;/span&gt;,
+  &quot;&lt;span class=&quot;attribute&quot;&gt;markdown&lt;/span&gt;&quot;: &lt;span class=&quot;value&quot;&gt;{
+    &quot;&lt;span class=&quot;attribute&quot;&gt;smartLists&lt;/span&gt;&quot;: &lt;span class=&quot;value&quot;&gt;&lt;span class=&quot;literal&quot;&gt;true&lt;/span&gt;&lt;/span&gt;,
+    &quot;&lt;span class=&quot;attribute&quot;&gt;smartypants&lt;/span&gt;&quot;: &lt;span class=&quot;value&quot;&gt;&lt;span class=&quot;literal&quot;&gt;true&lt;/span&gt;
+  }&lt;/span&gt;&lt;/span&gt;,
+  &quot;&lt;span class=&quot;attribute&quot;&gt;paginator&lt;/span&gt;&quot;: &lt;span class=&quot;value&quot;&gt;{
+    &quot;&lt;span class=&quot;attribute&quot;&gt;perPage&lt;/span&gt;&quot;: &lt;span class=&quot;value&quot;&gt;&lt;span class=&quot;number&quot;&gt;3&lt;/span&gt;
+  }&lt;/span&gt;
+}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;E após as minhas alterações, eu o deixei assim:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;lang-json&quot;&gt;{
+  &quot;&lt;span class=&quot;attribute&quot;&gt;locals&lt;/span&gt;&quot;: &lt;span class=&quot;value&quot;&gt;{
+    &quot;&lt;span class=&quot;attribute&quot;&gt;url&lt;/span&gt;&quot;: &lt;span class=&quot;value&quot;&gt;&lt;span class=&quot;string&quot;&gt;&quot;http://oqueaprendihoje.com.br&quot;&lt;/span&gt;&lt;/span&gt;,
+    &quot;&lt;span class=&quot;attribute&quot;&gt;name&lt;/span&gt;&quot;: &lt;span class=&quot;value&quot;&gt;&lt;span class=&quot;string&quot;&gt;&quot;O Que Aprendi Hoje&quot;&lt;/span&gt;&lt;/span&gt;,
+    &quot;&lt;span class=&quot;attribute&quot;&gt;owner&lt;/span&gt;&quot;: &lt;span class=&quot;value&quot;&gt;&lt;span class=&quot;string&quot;&gt;&quot;João Felix&quot;&lt;/span&gt;&lt;/span&gt;,
+    &quot;&lt;span class=&quot;attribute&quot;&gt;description&lt;/span&gt;&quot;: &lt;span class=&quot;value&quot;&gt;&lt;span class=&quot;string&quot;&gt;&quot;A saga de um aprendiz encantado com o universo do Front-end&quot;&lt;/span&gt;&lt;/span&gt;,
+    &quot;&lt;span class=&quot;attribute&quot;&gt;keywords&lt;/span&gt;&quot; : &lt;span class=&quot;value&quot;&gt;[&lt;span class=&quot;string&quot;&gt;&quot;javascript&quot;&lt;/span&gt;,&lt;span class=&quot;string&quot;&gt;&quot;css&quot;&lt;/span&gt;,&lt;span class=&quot;string&quot;&gt;&quot;front-end&quot;&lt;/span&gt;,&lt;span class=&quot;string&quot;&gt;&quot;web&quot;&lt;/span&gt;,&lt;span class=&quot;string&quot;&gt;&quot;development&quot;&lt;/span&gt;]&lt;/span&gt;,
+    &quot;&lt;span class=&quot;attribute&quot;&gt;disqus&lt;/span&gt;&quot;: &lt;span class=&quot;value&quot;&gt;{
+      &quot;&lt;span class=&quot;attribute&quot;&gt;id&lt;/span&gt;&quot; : &lt;span class=&quot;value&quot;&gt;&lt;span class=&quot;string&quot;&gt;&quot;oqueaprendihoje&quot;&lt;/span&gt;
+    }&lt;/span&gt;
+  }&lt;/span&gt;&lt;/span&gt;,
+  &quot;&lt;span class=&quot;attribute&quot;&gt;plugins&lt;/span&gt;&quot;: &lt;span class=&quot;value&quot;&gt;[
+    &lt;span class=&quot;string&quot;&gt;&quot;./plugins/paginator.coffee&quot;&lt;/span&gt;
+  ]&lt;/span&gt;,
+  &quot;&lt;span class=&quot;attribute&quot;&gt;require&lt;/span&gt;&quot;: &lt;span class=&quot;value&quot;&gt;{
+    &quot;&lt;span class=&quot;attribute&quot;&gt;moment&lt;/span&gt;&quot;: &lt;span class=&quot;value&quot;&gt;&lt;span class=&quot;string&quot;&gt;&quot;moment&quot;&lt;/span&gt;&lt;/span&gt;,
+    &quot;&lt;span class=&quot;attribute&quot;&gt;_&lt;/span&gt;&quot;: &lt;span class=&quot;value&quot;&gt;&lt;span class=&quot;string&quot;&gt;&quot;underscore&quot;&lt;/span&gt;&lt;/span&gt;,
+    &quot;&lt;span class=&quot;attribute&quot;&gt;typogr&lt;/span&gt;&quot;: &lt;span class=&quot;value&quot;&gt;&lt;span class=&quot;string&quot;&gt;&quot;typogr&quot;&lt;/span&gt;
+  }&lt;/span&gt;&lt;/span&gt;,
+  &quot;&lt;span class=&quot;attribute&quot;&gt;jade&lt;/span&gt;&quot;: &lt;span class=&quot;value&quot;&gt;{
+    &quot;&lt;span class=&quot;attribute&quot;&gt;pretty&lt;/span&gt;&quot;: &lt;span class=&quot;value&quot;&gt;&lt;span class=&quot;literal&quot;&gt;true&lt;/span&gt;
+  }&lt;/span&gt;&lt;/span&gt;,
+  &quot;&lt;span class=&quot;attribute&quot;&gt;markdown&lt;/span&gt;&quot;: &lt;span class=&quot;value&quot;&gt;{
+    &quot;&lt;span class=&quot;attribute&quot;&gt;smartLists&lt;/span&gt;&quot;: &lt;span class=&quot;value&quot;&gt;&lt;span class=&quot;literal&quot;&gt;true&lt;/span&gt;&lt;/span&gt;,
+    &quot;&lt;span class=&quot;attribute&quot;&gt;smartypants&lt;/span&gt;&quot;: &lt;span class=&quot;value&quot;&gt;&lt;span class=&quot;literal&quot;&gt;true&lt;/span&gt;
+  }&lt;/span&gt;&lt;/span&gt;,
+  &quot;&lt;span class=&quot;attribute&quot;&gt;paginator&lt;/span&gt;&quot;: &lt;span class=&quot;value&quot;&gt;{
+    &quot;&lt;span class=&quot;attribute&quot;&gt;perPage&lt;/span&gt;&quot;: &lt;span class=&quot;value&quot;&gt;&lt;span class=&quot;number&quot;&gt;10&lt;/span&gt;
+  }&lt;/span&gt;
+}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Basicamente alterei as propriedades do blog, como nome, proprietário, descrição e palavras-chaves, alem de alterar o número de paginas e inserir o objeto “disqus” para utilizarmos no controle de comentários; Vale ressaltar que o objeto “locals” fica acessivel aos templates também.&lt;/p&gt;
+&lt;p&gt;Outra alteração necessária foi a criação de um autor, para isso, removi os autores padrões e adicionei o meu na pasta “contents/authors”; O identificador de autor no artigo é o nome do arquivo e o conteúdo é um objeto JSON:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;lang-json&quot;&gt;{
+    &quot;&lt;span class=&quot;attribute&quot;&gt;name&lt;/span&gt;&quot;:   &lt;span class=&quot;value&quot;&gt;&lt;span class=&quot;string&quot;&gt;&quot;João Felix&quot;&lt;/span&gt;&lt;/span&gt;,
+    &quot;&lt;span class=&quot;attribute&quot;&gt;email&lt;/span&gt;&quot;:  &lt;span class=&quot;value&quot;&gt;&lt;span class=&quot;string&quot;&gt;&quot;jr8116[at]gmail[dot]com&quot;&lt;/span&gt;&lt;/span&gt;,
+    &quot;&lt;span class=&quot;attribute&quot;&gt;bio&lt;/span&gt;&quot;:    &lt;span class=&quot;value&quot;&gt;&lt;span class=&quot;string&quot;&gt;&quot;Aprendiz, desenvolvedor e empreendedor!&quot;&lt;/span&gt;
+}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;h3&gt;Comentários nos artigos&lt;/h3&gt;
+&lt;p&gt;Todo blog que se preze, precisa aceitar comentários. Para isso, utilizei a solução &lt;a href=&quot;http://disqus.com/&quot;&gt;Disqus&lt;/a&gt;, que me permite apenas pela referência do utilizador e da página atual, disponibilizar para os usuários uma forma de comentar os artigos.&lt;/p&gt;
+&lt;p&gt;Para manter o padrão de organização do projeto, eu criei um &lt;a href=&quot;https://github.com/visionmedia/jade&quot;&gt;template jade&lt;/a&gt; chamado &amp;#39;disqus.jade“ e o coloquei na pasta ”templates&amp;quot; (Também o dinamizei para utilizar o id do objeto disqus que determinamos); Este arquivo nada mais é do que a transposição do código fornecido pelo &lt;a href=&quot;http://disqus.com/&quot;&gt;Disqus&lt;/a&gt;:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;lang-xml&quot;&gt;    &lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;title&quot;&gt;div&lt;/span&gt; &lt;span class=&quot;attribute&quot;&gt;id&lt;/span&gt;=&lt;span class=&quot;value&quot;&gt;&quot;disqus_thread&quot;&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;title&quot;&gt;div&lt;/span&gt;&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;title&quot;&gt;script&lt;/span&gt; &lt;span class=&quot;attribute&quot;&gt;type&lt;/span&gt;=&lt;span class=&quot;value&quot;&gt;&quot;text/javascript&quot;&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;javascript&quot;&gt;
+        &lt;span class=&quot;keyword&quot;&gt;var&lt;/span&gt; disqus_shortname = &lt;span class=&quot;string&quot;&gt;'oqueaprendihoje'&lt;/span&gt;; 
+        (&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt;() {
+            &lt;span class=&quot;keyword&quot;&gt;var&lt;/span&gt; dsq = document.createElement(&lt;span class=&quot;string&quot;&gt;'script'&lt;/span&gt;); dsq.type = &lt;span class=&quot;string&quot;&gt;'text/javascript'&lt;/span&gt;; dsq.async = &lt;span class=&quot;literal&quot;&gt;true&lt;/span&gt;;
+            dsq.src = &lt;span class=&quot;string&quot;&gt;'//'&lt;/span&gt; + disqus_shortname + &lt;span class=&quot;string&quot;&gt;'.disqus.com/embed.js'&lt;/span&gt;;
+            (document.getElementsByTagName(&lt;span class=&quot;string&quot;&gt;'head'&lt;/span&gt;)[&lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;] || document.getElementsByTagName(&lt;span class=&quot;string&quot;&gt;'body'&lt;/span&gt;)[&lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;]).appendChild(dsq);
+        })();
+    &lt;/span&gt;&lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;title&quot;&gt;script&lt;/span&gt;&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;title&quot;&gt;noscript&lt;/span&gt;&amp;gt;&lt;/span&gt;Please enable JavaScript to view the &lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;title&quot;&gt;a&lt;/span&gt; &lt;span class=&quot;attribute&quot;&gt;href&lt;/span&gt;=&lt;span class=&quot;value&quot;&gt;&quot;http://disqus.com/?ref_noscript&quot;&lt;/span&gt;&amp;gt;&lt;/span&gt;comments powered by Disqus.&lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;title&quot;&gt;a&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;title&quot;&gt;noscript&lt;/span&gt;&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;title&quot;&gt;a&lt;/span&gt; &lt;span class=&quot;attribute&quot;&gt;href&lt;/span&gt;=&lt;span class=&quot;value&quot;&gt;&quot;http://disqus.com&quot;&lt;/span&gt; &lt;span class=&quot;attribute&quot;&gt;class&lt;/span&gt;=&lt;span class=&quot;value&quot;&gt;&quot;dsq-brlink&quot;&lt;/span&gt;&amp;gt;&lt;/span&gt;comments powered by &lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;title&quot;&gt;span&lt;/span&gt; &lt;span class=&quot;attribute&quot;&gt;class&lt;/span&gt;=&lt;span class=&quot;value&quot;&gt;&quot;logo-disqus&quot;&lt;/span&gt;&amp;gt;&lt;/span&gt;Disqus&lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;title&quot;&gt;span&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;title&quot;&gt;a&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Para o padrão de escrita &lt;a href=&quot;https://github.com/visionmedia/jade&quot;&gt;Jade&lt;/a&gt;:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;lang-python&quot;&gt;div(id=&lt;span class=&quot;string&quot;&gt;&quot;disqus_thread&quot;&lt;/span&gt;)
+script.
+       var disqus_shortname = &lt;span class=&quot;string&quot;&gt;&quot;#{disqus.id}&quot;&lt;/span&gt;;
+        (function() {
+            var dsq = document.createElement(&lt;span class=&quot;string&quot;&gt;'script'&lt;/span&gt;); dsq.type = &lt;span class=&quot;string&quot;&gt;'text/javascript'&lt;/span&gt;; dsq.async = true;
+            dsq.src = &lt;span class=&quot;string&quot;&gt;'//'&lt;/span&gt; + disqus_shortname + &lt;span class=&quot;string&quot;&gt;'.disqus.com/embed.js'&lt;/span&gt;;
+            (document.getElementsByTagName(&lt;span class=&quot;string&quot;&gt;'head'&lt;/span&gt;)[&lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;] || document.getElementsByTagName(&lt;span class=&quot;string&quot;&gt;'body'&lt;/span&gt;)[&lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;]).appendChild(dsq);
+        })();
+noscript
+    Habilite o Javascript do seu browser para ver os
+    a(href=&lt;span class=&quot;string&quot;&gt;&quot;http://disqus.com/?ref_noscript&quot;&lt;/span&gt;) comentários mantidos pelo Disqus.
+a.dsq-brlink(href=&lt;span class=&quot;string&quot;&gt;&quot;http://disqus.com&quot;&lt;/span&gt;)
+    comments powered by
+    span.logo-disqus
+        Disqus&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;(Este foi meu primeiro contato com o &lt;a href=&quot;https://github.com/visionmedia/jade&quot;&gt;Jade Template&lt;/a&gt;, acredito que em breve escreverei sobre um aprendizado mais aprofundado)&lt;/p&gt;
+&lt;p&gt;Com o template pronto, basta inclui-lo no template “article.jade” que também está no diretório “templates”:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;lang-python&quot;&gt;  include disqus&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Resultado final do template:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;lang-python&quot;&gt;extends layout
+
+block append vars
+  - bodyclass = &lt;span class=&quot;string&quot;&gt;'article-detail'&lt;/span&gt;
+
+block prepend title
+  | &lt;span class=&quot;comment&quot;&gt;#{ page.title + &quot; - &quot;}&lt;/span&gt;
+
+block header
+  include author
+  h1= page.title
+  p.author
+    | &lt;span class=&quot;comment&quot;&gt;#{ &quot;Escrito por &quot; }&lt;/span&gt;
+    mixin author(page.metadata.author)
+
+block content
+  article.article
+    section.content!= typogr(page.html).typogrify()
+
+
+block prepend footer
+  include disqus
+  div.nav
+    a(href=contents.index.url) « Lista&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Também fiz algumas alterações por menores, como: Exibir o Twitter e não o E-mail do autor, links para compartilhamento utilizando o &lt;a href=&quot;http://www.addthis.com/&quot;&gt;Addthis&lt;/a&gt;, inserção do &lt;a href=&quot;https://www.google.com/analytics/&quot;&gt;Google Analytics&lt;/a&gt; e tradução dos links de avançar, ver mais e etc. que estão disponíveis no código fonte do blog.&lt;/p&gt;
+&lt;h3&gt;Publicando&lt;/h3&gt;
+&lt;p&gt;Pronto! Nossa estrutura de blog está criada! Agora falta apenas gerar os arquivos finais para a publicação, que estarão disponíveis na pasta “build”:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;$ wintersmith build&lt;/code&gt;&lt;/pre&gt;
+&lt;h3&gt;Acabamos!&lt;/h3&gt;
+&lt;p&gt; Neste momento, temos um blog pronto, porem, sem customização e apenas com o layout padrão do &lt;a href=&quot;http://wintersmith.io/&quot;&gt;Wintersmith&lt;/a&gt;. Provavelmente no artigo de amanhã eu falarei sobre a customização visual do &lt;a href=&quot;http://wintersmith.io/&quot;&gt;Wintersmith&lt;/a&gt;, onde pretendo utilizar o &lt;a href=&quot;http://purecss.io/&quot;&gt;Pure.css&lt;/a&gt;. Espero que tenham gostado do artigo e agradeço qualquer crítica, elogio ou comentário! Espero continuar com novos conteúdos e conto com a colaboração de todos! Até breve!&lt;/p&gt;
+&lt;p&gt;Todo o código está disponível no Github: &lt;a href=&quot;https://github.com/jr8116/oqueaprendihoje&quot;&gt;&lt;a href=&quot;https://github.com/jr8116/oqueaprendihoje&quot;&gt;https://github.com/jr8116/oqueaprendihoje&lt;/a&gt;&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
+  </channel>
+</rss>

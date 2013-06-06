@@ -1,0 +1,35 @@
+
+extends layout
+
+block append vars
+  - bodyclass = 'article-detail'
+
+block prepend title
+  | #{ page.title + " - "}
+
+block header
+  include author
+  h1= page.title
+  p.author
+    | #{ "Escrito por " }
+    mixin author(page.metadata.author)
+
+block content
+  article.article
+    section.content!= typogr(page.html).typogrify()
+
+
+block prepend footer
+  div.addthis_toolbox.addthis_default_style
+    a.addthis_button_facebook_like(fb:like:layout="button_count")
+    a.addthis_button_tweet
+    a.addthis_counter.addthis_pill_style
+    script.
+        var addthis_config = {"data_track_addressbar":true};
+    script(src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-50f7680d30aa565f")
+
+  include disqus
+  div.nav
+    a(href=contents.index.url) « Lista
+
+

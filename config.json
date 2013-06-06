@@ -1,0 +1,34 @@
+{
+  "locals": {
+    "url": "http://oqueaprendihoje.com.br",
+    "name": "O Que Aprendi Hoje",
+    "owner": "João Felix",
+    "description": "A saga de um aprendiz encantado com o universo do Front-end",
+    "keywords" : ["javascript","css","front-end","web","development"],
+    "disqus": {
+      "id" : "oqueaprendihoje"
+    },
+    "analytics": {
+       "domain":"oqueaprendihoje.com.br",
+       "id":"UA-41535019-1"
+    }
+  },
+  "plugins": [
+    "./plugins/paginator.coffee"
+  ],
+  "require": {
+    "moment": "moment",
+    "_": "underscore",
+    "typogr": "typogr"
+  },
+  "jade": {
+    "pretty": true
+  },
+  "markdown": {
+    "smartLists": true,
+    "smartypants": true
+  },
+  "paginator": {
+    "perPage": 10
+  }
+}
