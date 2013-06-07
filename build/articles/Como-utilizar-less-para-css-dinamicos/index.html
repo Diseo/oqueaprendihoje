@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width">
+    <title>Como utilizar LESS para CSS Dinâmicos - O Que Aprendi Hoje
+    </title>
+    <link rel="alternate" href="http://oqueaprendihoje.com.br/feed.xml" type="application/rss+xml" title="A saga de um aprendiz encantado com o universo do Front-end">
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic|Anonymous+Pro:400,700,400italic,700italic|Merriweather:400,700,300">
+    <link rel="stylesheet" href="/css/main.css">
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+      
+      ga('create', 'UA-41535019-1', 'oqueaprendihoje.com.br');
+      ga('send', 'pageview');
+    </script>
+  </head>
+  <body class="article-detail">
+    <header class="header">
+      <div class="content-wrap">
+        <h1>Como utilizar LESS para CSS Dinâmicos</h1>
+        <p class="author">Escrito por <span class="author"><a target="_blank" href="//twitter.com/_joaofelix">João Felix</a></span>
+        </p>
+      </div>
+    </header>
+    <div id="content">
+      <div class="content-wrap">
+        <article class="article">
+          <section class="content"><p>Sei que eu tinha escrito sobre utilizar o <a href="http://purecss.io/">Pure.css</a> na estilização do Blog, porem, decidi fazer algo mais ousado do que utilizar uma biblioteca pronta! Decidi aprender <a href="http://lesscss.org/"><span class="caps">LESS</span></a>!</p>
+<p><span class="more"></span></p>
+<h3>A&nbsp;motivação</h3>
+<p>Sempre sofri na hora de escrever guias de estilos bem organizadas, otimizadas e redundantes, porem, quando eu achava que estava melhorando, surgiu o tal do <a href="http://tableless.com.br/design-responsivo-na-pratica-do-rascunho-ao-digita/">Design Responsivo</a> (O <a href="http://tableless.com.br/design-responsivo-na-pratica-do-rascunho-ao-digita/">link</a> é um artigo bem legal do <a href="http://tableless.com.br/">Tableless</a>), que me fez ficar ainda mais preocupado com estes arquivos .css, pois os escopos <a href="http://www.w3.org/TR/CSS2/media.html">@media</a> almentaram muito a quantidade de códigos; Por estes motivos, decidi aprender sobre o <a href="http://lesscss.org/"><span class="caps">LESS</span></a>, a linguagem do css dinâmico (Existem outras opçõs, como o <a href="http://sass-lang.com/"><span class="caps">SASS</span></a>, porem, denovo, não queria usar <a href="http://www.ruby-lang.org/">Ruby</a>)!</p>
+<h3>O <a href="http://lesscss.org/"><span class="caps">LESS</span></a></h3>
+<p>O <a href="http://lesscss.org/"><span class="caps">LESS</span></a>, que está na sua versão 1.4.0 beta, é uma linguagem que extende ao <span class="caps">CSS</span> o comportamento dinâmicos de variáveis, operações, mixins e funções; O legal da linguagem é que ela roda tanto em server-side (com o <a href="http://nodejs.org/">Node.js</a> e <a href="https://developer.mozilla.org/en-US/docs/Rhino">Rhino</a>) quanto client-side (apenas browsers modernos). Para instala-lo, basta ter o <a href="http://nodejs.org/">Node.js</a> instalado e com o <a href="https://npmjs.org/">npm</a>&nbsp;ativo:</p>
+<pre><code>npm install -g less</code></pre>
+<h3><a href="http://lesscss.org/"><span class="caps">LESS</span></a> no <a href="http://wintersmith.io/">Wintersmith</a></h3>
+<p>Como o blog foi criado com o <a href="http://wintersmith.io/">Wintersmith</a> (se quiser saber como, <a href="/articles/como-criar-um-blog-usando-wintersmith/">leia aqui</a>), utilizei o <a href="https://github.com/jnordberg/wintersmith-less">plugin</a> do Johan Nordberg que já faz todo o trabalho de integrar as duas belezinhas. Olha o quanto é&nbsp;fácil:</p>
+<pre><code>$ npm install wintersmith-less -g</code></pre>
+<p>Com o pacote instalado, basta acessar o diretório do seu projeto <a href="http://wintersmith.io/">Wintersmith</a> e instalar o&nbsp;plugin:</p>
+<pre><code>$ cd &lt;path&gt;
+$ npm install wintersmith-less -g</code></pre>
+<p>Simples,&nbsp;não!?</p>
+<h3>Escrevendo <a href="http://lesscss.org/"><span class="caps">LESS</span></a></h3>
+<p>Como não terei tempo para criar um bom layout em 2 horas de estudo, vou inicialmente transformar o css padrão do <a href="http://wintersmith.io/">Wintersmith</a> para o <a href="http://lesscss.org/"><span class="caps">LESS</span></a>, deixando bem simplificado o&nbsp;aprendizado.</p>
+<p>O primeiro passo, foi criar o arquivo “contents/css/main.less” (Que quando compilado, se torna o main.css), onde codificaremos todo o css do antigo arquivo main.css já existente na pasta “contents/css”. Ai, foi só começar a escrever&nbsp;códigos;</p>
+<p>Criei um arquivo para as variaveis de cores (Ótimo para a&nbsp;reutilização):</p>
+<pre><code class="lang-css"><span class="at_rule">@body-background-color: #f8f8f8</span>;
+<span class="at_rule">@body-text-color: #<span class="number">171717</span></span>;
+<span class="at_rule">@a-hover-color: #ff8000</span>;
+<span class="at_rule">@hr-color: #d2d2d2</span>;</code></pre>
+<p>(Confesso que cometi um erro besta; Gerei o arquivo, fiz o import e fui para a visualização para ver o que aconteceu, só que nada aparecia, devido às variaveis não serem&nbsp;compiladas)</p>
+<p>Depois, separei os estilos em contextos,  criando um conjunto de:
+    <em>    header.less
+    </em>    commons.less
+    <em>    footer.less
+    </em>    article.less
+    <em>    archive.less
+    </em>&nbsp;code.less</p>
+<p>Que serão ao final da implementação, importados no arquivo&nbsp;main.css:</p>
+<pre><code class="lang-css"><span class="at_rule">@<span class="keyword">import</span> <span class="string">"colors"</span></span>;
+<span class="at_rule">@<span class="keyword">import</span> <span class="string">"functions"</span></span>;
+<span class="at_rule">@<span class="keyword">import</span> <span class="string">"commons"</span></span>;
+<span class="at_rule">@<span class="keyword">import</span> <span class="string">"header"</span></span>;
+<span class="at_rule">@<span class="keyword">import</span> <span class="string">"footer"</span></span>;
+<span class="at_rule">@<span class="keyword">import</span> <span class="string">"article"</span></span>;
+<span class="at_rule">@<span class="keyword">import</span> <span class="string">"archive"</span></span>;
+<span class="at_rule">@<span class="keyword">import</span> <span class="string">"code"</span></span>;</code></pre>
+<p>Uma das coisas mais divertidas do <a href="http://lesscss.org/"><span class="caps">LESS</span></a> é poder usar o encascateamento de códigos, o que economiza bastante código e facilita o entendimento do escopo, como o exemplo&nbsp;abaixo:</p>
+<p>No&nbsp;css:</p>
+<pre><code class="lang-css"><span class="tag">footer</span> <span class="rules">{
+  <span class="rule"><span class="attribute">margin</span>:<span class="value"> <span class="number">3</span>em <span class="number">0</span>;</span></span>
+<span class="rule">}</span></span>
+
+<span class="tag">footer</span> <span class="class">.nav</span> <span class="rules">{
+  <span class="rule"><span class="attribute">text-align</span>:<span class="value"> center;</span></span>
+  <span class="rule"><span class="attribute">margin-top</span>:<span class="value"> <span class="number">5</span>em;</span></span>
+  <span class="rule"><span class="attribute">margin-bottom</span>:<span class="value"> <span class="number">3.5</span>em;</span></span>
+<span class="rule">}</span></span>
+
+<span class="tag">footer</span> <span class="class">.nav</span> <span class="tag">a</span> <span class="rules">{
+  <span class="rule"><span class="attribute">padding</span>:<span class="value"> <span class="number">0</span> <span class="number">0.5</span>em;</span></span>
+  <span class="rule"><span class="attribute">font-size</span>:<span class="value"> <span class="number">1.2</span>em;</span></span>
+  <span class="rule"><span class="attribute">text-decoration</span>:<span class="value"> none;</span></span>
+<span class="rule">}</span></span></code></pre>
+<p>No <a href="http://lesscss.org/"><span class="caps">LESS</span></a>:</p>
+<pre><code class="lang-css">footer {
+    margin: 3em 0;
+
+    .nav {
+      text-align: center;
+      margin-top: 5em;
+      margin-bottom: 3.5em;
+
+      a {
+        padding: 0 0.5em;
+        font-size: 1.2em;
+        text-decoration: none;
+      }
+    }
+}</code></pre>
+<p>Para as media queries, eu inseri diretamente nos contextos, para que ficasse mais facil o&nbsp;entendimento:</p>
+<p>Como era no&nbsp;<span class="caps">CSS</span>:</p>
+<pre><code class="lang-css"><span class="at_rule">@<span class="keyword">media</span> (min-width: <span class="number">1600</span>px) </span>{
+  <span class="tag">body</span> <span class="rules">{ <span class="rule"><span class="attribute">font-size</span>:<span class="value"> <span class="number">26</span>px;</span></span> <span class="rule">}</span></span>
+}
+
+<span class="at_rule">@<span class="keyword">media</span> (max-width: <span class="number">900</span>px) </span>{
+  <span class="tag">body</span> <span class="rules">{ <span class="rule"><span class="attribute">font-size</span>:<span class="value"> <span class="number">18</span>px;</span></span> <span class="rule">}</span></span>
+}</code></pre>
+<p>No <a href="http://lesscss.org/"><span class="caps">LESS</span></a>:</p>
+<pre><code class="lang-css">body {
+  @media (min-width: 1600px) { font-size: 26px; }
+  @media (max-width: 900px) { font-size: 18px; }
+}</code></pre>
+<p>(Confesso que ai surgiu uma dúvida; Seria melhor separar por elemento as media queries, ou a media query deveria ser um contexto com a definição dos seus&nbsp;elementos?)</p>
+<p>Para finalizar e aprender sobre os mixins, criei um arquivo “mixins.less” para&nbsp;armazenalos:</p>
+<pre><code class="lang-css"><span class="class">.column-count</span>(<span class="at_rule">@count: <span class="number">1</span>) </span>{
+  -<span class="tag">webkit</span>-<span class="tag">column</span>-<span class="tag">count</span>: <span class="at_rule">@count</span>;
+  -<span class="tag">moz</span>-<span class="tag">column</span>-<span class="tag">count</span>: <span class="at_rule">@count</span>;
+  -<span class="tag">ms</span>-<span class="tag">column</span>-<span class="tag">count</span>: <span class="at_rule">@count</span>;
+  <span class="tag">column</span>-<span class="tag">count</span>: <span class="at_rule">@count</span>;
+}
+
+<span class="class">.column-gap</span>(<span class="at_rule">@gap: <span class="number">1</span>em) </span>{
+  -<span class="tag">webkit</span>-<span class="tag">column</span>-<span class="tag">gap</span>: <span class="at_rule">@gap</span>;
+  -<span class="tag">moz</span>-<span class="tag">column</span>-<span class="tag">gap</span>: <span class="at_rule">@gap</span>;
+  -<span class="tag">ms</span>-<span class="tag">column</span>-<span class="tag">gap</span>: <span class="at_rule">@gap</span>;
+  <span class="tag">column</span>-<span class="tag">gap</span>: <span class="at_rule">@gap</span>;
+}</code></pre>
+<p>Estas funções ajudam muito para prever todos os prefixos&nbsp;proprietários!</p>
+<h3>Acabamos</h3>
+<p>Feito as alterações, bastou compilar tudo e correr pro abraço! O que aprendi hoje não foi tão aprofundado, pelo tempo corrido, mas espero que tenham gostado! Um&nbsp;abraço!</p>
+<p>Todo o código atualizado está disponível no Github: <a href="https://github.com/jr8116/oqueaprendihoje"><a href="https://github.com/jr8116/oqueaprendihoje">https://github.com/jr8116/oqueaprendihoje</a></a></p>
+</section>
+        </article>
+      </div>
+    </div>
+    <footer>
+      <div class="content-wrap">
+        <div class="addthis_toolbox addthis_default_style"><a fb:like:layout="button_count" class="addthis_button_facebook_like"></a><a class="addthis_button_tweet"></a><a class="addthis_counter addthis_pill_style"></a>
+          <script>var addthis_config = {"data_track_addressbar":true};</script>
+          <script src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-50f7680d30aa565f"></script>
+        </div>
+        <div id="disqus_thread"></div>
+        <script>
+          var disqus_shortname = "oqueaprendihoje";
+           (function() {
+               var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+               dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+               (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+           })();
+        </script>
+        <noscript>
+          <Habilite>o Javascript do seu browser para ver os</Habilite><a href="http://disqus.com/?ref_noscript">comentários mantidos pelo Disqus.</a>
+        </noscript><a href="http://disqus.com" class="dsq-brlink">
+          <comments>powered by</comments><span class="logo-disqus">
+            <Disqus></Disqus></span></a>
+        <div class="nav"><a href="/">« Lista</a></div>
+        <section class="about"><p>O objetivo deste blog é apenas devolver à internet um pouco do que aprendi com ela.</p>
+<p>Gostaria de se juntar a mim ou ver algum conteúdo especifico neste blog? Entre em <a href="mailto:jr8116@gmail.com">contato</a>, deixe comentários ou me ache no <a href="http://twitter.com/_joaofelix">twitter</a>!</p>
+
+        </section>
+        <section class="copy">
+          <p>&copy; 2013<a href="//twitter.com/_joaofelix" target="_blank"> João Felix</a>&mdash; powered by&nbsp;<a href="https://github.com/jnordberg/wintersmith">Wintersmith</a></p>
+        </section>
+      </div>
+    </footer>
+  </body>
+</html>
