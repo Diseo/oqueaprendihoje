@@ -66,7 +66,7 @@ Que serão ao final da implementação, importados no arquivo main.css:
 @import "archive";
 @import "code";
 ```
-Uma das coisas mais divertidas do [LESS][2] é poder usar o encascateamento de códigos, o que economiza bastante código e facilita o entendimento do escopo, como o exemplo abaixo:
+Uma das coisas mais divertidas do [LESS][2] é poder usar o encadeamento de códigos, o que economiza bastante código e facilita o entendimento do escopo, como o exemplo abaixo:
 
 No css:
 ```css
