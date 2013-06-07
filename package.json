@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "less": "1.4.x",
     "moment": "2.x",
     "underscore": "1.4.x",
     "typogr": "0.5.x"

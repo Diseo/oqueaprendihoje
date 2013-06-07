@@ -1,0 +1,59 @@
+@import "colors";
+
+.header {
+  margin: 3em 0 5em;
+
+  @media (max-width: 690px) { margin: 1em 0;  }
+
+  h1 {
+    font-size: 2.6em;
+    text-align: center;
+    font-weight: 700;
+    margin: 0;
+
+    @media (max-width: 690px) {
+      font-size: 1.4em;
+      margin-bottom: 0.6em;
+    }
+  }
+
+  a, a:hover {
+    text-decoration: none;
+    color: @body-text-color;
+  }
+
+  .author {
+    font-family: 'Merriweather', serif;
+    font-variant: small-caps;
+    text-transform: lowercase;
+    text-rendering: auto;
+    text-align: center;
+    font-weight: 400;
+    letter-spacing: 1px;
+  }
+
+  .description {
+    font-size: 1.2em;
+    font-style: italic;
+    text-align: center;
+    margin-top: -0.3em;
+
+    @media (max-width: 690px) {
+      font-size: 1em;
+    }
+  }
+}
+
+body.article-detail {
+  > header h1 {
+    font-size: 2.5em;
+    font-style: italic;
+    font-weight: 400;
+    margin-bottom: -0.2em;
+  }
+
+  > header {
+    margin-bottom: 3em;
+  }
+}
+

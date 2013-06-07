@@ -1,0 +1,77 @@
+@import "colors";
+
+code {
+  font-family: 'Anonymous Pro', monospace;
+  font-size: 0.85em;
+  color: @code-color;
+}
+
+pre code {
+  display: block;
+  line-height: 1.1;
+}
+
+p code {
+  padding: 0.1em 0.3em 0.2em;
+  border-radius: 0.3em;
+  position: relative;
+  top: -0.15em;
+  background: @code-background;
+  color: @alternative-code-color;
+  white-space: nowrap;
+}
+
+code.lang-markdown {
+  color: @code-lang-markdown;
+
+  .header, .strong {
+    font-weight: bold;
+  }
+  .emphasis {
+    font-style: italic;
+  }
+  .horizontal_rule,
+  .link_label,
+  .code,
+  .header,
+  .link_url {
+    color: @code-background;
+  }
+
+  .blockquote,
+  .bullet {
+    color: @code-blockquote;
+  }
+}
+
+.tomorrow-comment, pre .comment, pre .title {
+  color: @code-color-comment;
+}
+
+.tomorrow-red, pre .variable, pre .attribute, pre .tag, pre .regexp, pre .ruby .constant, pre .xml .tag .title, pre .xml .pi, pre .xml .doctype, pre .html .doctype, pre .css .id, pre .css .class, pre .css .pseudo {
+  color: @code-color-red;
+}
+
+.tomorrow-orange, pre .number, pre .preprocessor, pre .built_in, pre .literal, pre .params, pre .constant {
+  color: @code-color-orange;
+}
+
+.tomorrow-yellow, pre .class, pre .ruby .class .title, pre .css .rules .attribute {
+  color: @code-color-yellow;
+}
+
+.tomorrow-green, pre .string, pre .value, pre .inheritance, pre .header, pre .ruby .symbol, pre .xml .cdata {
+  color: @code-color-green;
+}
+
+.tomorrow-aqua, pre .css .hexcolor {
+  color: @code-color-aqua;
+}
+
+.tomorrow-blue, pre .function, pre .python .decorator, pre .python .title, pre .ruby .function .title, pre .ruby .title .keyword, pre .perl .sub, pre .javascript .title, pre .coffeescript .title {
+  color: @code-color-blue;
+}
+
+.tomorrow-purple, pre .keyword, pre .javascript .function {
+  color: @code-color-purple;
+}

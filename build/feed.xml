@@ -5,9 +5,122 @@
     <atom:link href="http://oqueaprendihoje.com.br/feed.xml" rel="self" type="application/rss+xml"></atom:link>
     <link>http://oqueaprendihoje.com.br</link>
     <description>A saga de um aprendiz encantado com o universo do Front-end</description>
-    <pubDate>Thu, 06 Jun 2013 10:00:00 -0300</pubDate>
+    <pubDate>Fri, 07 Jun 2013 10:25:00 -0300</pubDate>
     <generator>Wintersmith - https://github.com/jnordberg/wintersmith</generator>
     <language>en</language>
+    <item>
+      <title>Como utilizar LESS para CSS Dinâmicos</title>
+      <link>http://oqueaprendihoje.com.br/articles/Como-utilizar-less-para-css-dinamicos/</link>
+      <pubDate>Fri, 07 Jun 2013 10:25:00 -0300</pubDate>
+      <guid isPermaLink="true">http://oqueaprendihoje.com.br/articles/Como-utilizar-less-para-css-dinamicos/</guid>
+      <author></author>
+      <description>&lt;p&gt;Sei que eu tinha escrito sobre utilizar o &lt;a href=&quot;http://purecss.io/&quot;&gt;Pure.css&lt;/a&gt; na estilização do Blog, porem, decidi fazer algo mais ousado do que utilizar uma biblioteca pronta! Decidi aprender &lt;a href=&quot;http://lesscss.org/&quot;&gt;LESS&lt;/a&gt;!&lt;/p&gt;
+&lt;p&gt;&lt;span class=&quot;more&quot;&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;h3&gt;A motivação&lt;/h3&gt;
+&lt;p&gt;Sempre sofri na hora de escrever guias de estilos bem organizadas, otimizadas e redundantes, porem, quando eu achava que estava melhorando, surgiu o tal do &lt;a href=&quot;http://tableless.com.br/design-responsivo-na-pratica-do-rascunho-ao-digita/&quot;&gt;Design Responsivo&lt;/a&gt; (O &lt;a href=&quot;http://tableless.com.br/design-responsivo-na-pratica-do-rascunho-ao-digita/&quot;&gt;link&lt;/a&gt; é um artigo bem legal do &lt;a href=&quot;http://tableless.com.br/&quot;&gt;Tableless&lt;/a&gt;), que me fez ficar ainda mais preocupado com estes arquivos .css, pois os escopos &lt;a href=&quot;http://www.w3.org/TR/CSS2/media.html&quot;&gt;@media&lt;/a&gt; almentaram muito a quantidade de códigos; Por estes motivos, decidi aprender sobre o &lt;a href=&quot;http://lesscss.org/&quot;&gt;LESS&lt;/a&gt;, a linguagem do css dinâmico (Existem outras opçõs, como o &lt;a href=&quot;http://sass-lang.com/&quot;&gt;SASS&lt;/a&gt;, porem, denovo, não queria usar &lt;a href=&quot;http://www.ruby-lang.org/&quot;&gt;Ruby&lt;/a&gt;)!&lt;/p&gt;
+&lt;h3&gt;O &lt;a href=&quot;http://lesscss.org/&quot;&gt;LESS&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;O &lt;a href=&quot;http://lesscss.org/&quot;&gt;LESS&lt;/a&gt;, que está na sua versão 1.4.0 beta, é uma linguagem que extende ao CSS o comportamento dinâmicos de variáveis, operações, mixins e funções; O legal da linguagem é que ela roda tanto em server-side (com o &lt;a href=&quot;http://nodejs.org/&quot;&gt;Node.js&lt;/a&gt; e &lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Rhino&quot;&gt;Rhino&lt;/a&gt;) quanto client-side (apenas browsers modernos). Para instala-lo, basta ter o &lt;a href=&quot;http://nodejs.org/&quot;&gt;Node.js&lt;/a&gt; instalado e com o &lt;a href=&quot;https://npmjs.org/&quot;&gt;npm&lt;/a&gt; ativo:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;npm install -g less&lt;/code&gt;&lt;/pre&gt;
+&lt;h3&gt;&lt;a href=&quot;http://lesscss.org/&quot;&gt;LESS&lt;/a&gt; no &lt;a href=&quot;http://wintersmith.io/&quot;&gt;Wintersmith&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;Como o blog foi criado com o &lt;a href=&quot;http://wintersmith.io/&quot;&gt;Wintersmith&lt;/a&gt; (se quiser saber como, &lt;a href=&quot;http://oqueaprendihoje.com.br/articles/como-criar-um-blog-usando-wintersmith/&quot;&gt;leia aqui&lt;/a&gt;), utilizei o &lt;a href=&quot;https://github.com/jnordberg/wintersmith-less&quot;&gt;plugin&lt;/a&gt; do Johan Nordberg que já faz todo o trabalho de integrar as duas belezinhas. Olha o quanto é fácil:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;$ npm install wintersmith-less -g&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Com o pacote instalado, basta acessar o diretório do seu projeto &lt;a href=&quot;http://wintersmith.io/&quot;&gt;Wintersmith&lt;/a&gt; e instalar o plugin:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;$ cd &amp;lt;path&amp;gt;
+$ npm install wintersmith-less -g&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Simples, não!?&lt;/p&gt;
+&lt;h3&gt;Escrevendo &lt;a href=&quot;http://lesscss.org/&quot;&gt;LESS&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;Como não terei tempo para criar um bom layout em 2 horas de estudo, vou inicialmente transformar o css padrão do &lt;a href=&quot;http://wintersmith.io/&quot;&gt;Wintersmith&lt;/a&gt; para o &lt;a href=&quot;http://lesscss.org/&quot;&gt;LESS&lt;/a&gt;, deixando bem simplificado o aprendizado.&lt;/p&gt;
+&lt;p&gt;O primeiro passo, foi criar o arquivo “contents/css/main.less” (Que quando compilado, se torna o main.css), onde codificaremos todo o css do antigo arquivo main.css já existente na pasta “contents/css”. Ai, foi só começar a escrever códigos;&lt;/p&gt;
+&lt;p&gt;Criei um arquivo para as variaveis de cores (Ótimo para a reutilização):&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;lang-css&quot;&gt;&lt;span class=&quot;at_rule&quot;&gt;@body-background-color: #f8f8f8&lt;/span&gt;;
+&lt;span class=&quot;at_rule&quot;&gt;@body-text-color: #&lt;span class=&quot;number&quot;&gt;171717&lt;/span&gt;&lt;/span&gt;;
+&lt;span class=&quot;at_rule&quot;&gt;@a-hover-color: #ff8000&lt;/span&gt;;
+&lt;span class=&quot;at_rule&quot;&gt;@hr-color: #d2d2d2&lt;/span&gt;;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;(Confesso que cometi um erro besta; Gerei o arquivo, fiz o import e fui para a visualização para ver o que aconteceu, só que nada aparecia, devido às variaveis não serem compiladas)&lt;/p&gt;
+&lt;p&gt;Depois, separei os estilos em contextos,  criando um conjunto de:
+    &lt;em&gt;    header.less
+    &lt;/em&gt;    commons.less
+    &lt;em&gt;    footer.less
+    &lt;/em&gt;    article.less
+    &lt;em&gt;    archive.less
+    &lt;/em&gt;    code.less&lt;/p&gt;
+&lt;p&gt;Que serão ao final da implementação, importados no arquivo main.css:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;lang-css&quot;&gt;&lt;span class=&quot;at_rule&quot;&gt;@&lt;span class=&quot;keyword&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;string&quot;&gt;&quot;colors&quot;&lt;/span&gt;&lt;/span&gt;;
+&lt;span class=&quot;at_rule&quot;&gt;@&lt;span class=&quot;keyword&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;string&quot;&gt;&quot;functions&quot;&lt;/span&gt;&lt;/span&gt;;
+&lt;span class=&quot;at_rule&quot;&gt;@&lt;span class=&quot;keyword&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;string&quot;&gt;&quot;commons&quot;&lt;/span&gt;&lt;/span&gt;;
+&lt;span class=&quot;at_rule&quot;&gt;@&lt;span class=&quot;keyword&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;string&quot;&gt;&quot;header&quot;&lt;/span&gt;&lt;/span&gt;;
+&lt;span class=&quot;at_rule&quot;&gt;@&lt;span class=&quot;keyword&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;string&quot;&gt;&quot;footer&quot;&lt;/span&gt;&lt;/span&gt;;
+&lt;span class=&quot;at_rule&quot;&gt;@&lt;span class=&quot;keyword&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;string&quot;&gt;&quot;article&quot;&lt;/span&gt;&lt;/span&gt;;
+&lt;span class=&quot;at_rule&quot;&gt;@&lt;span class=&quot;keyword&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;string&quot;&gt;&quot;archive&quot;&lt;/span&gt;&lt;/span&gt;;
+&lt;span class=&quot;at_rule&quot;&gt;@&lt;span class=&quot;keyword&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;string&quot;&gt;&quot;code&quot;&lt;/span&gt;&lt;/span&gt;;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Uma das coisas mais divertidas do &lt;a href=&quot;http://lesscss.org/&quot;&gt;LESS&lt;/a&gt; é poder usar o encascateamento de códigos, o que economiza bastante código e facilita o entendimento do escopo, como o exemplo abaixo:&lt;/p&gt;
+&lt;p&gt;No css:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;lang-css&quot;&gt;&lt;span class=&quot;tag&quot;&gt;footer&lt;/span&gt; &lt;span class=&quot;rules&quot;&gt;{
+  &lt;span class=&quot;rule&quot;&gt;&lt;span class=&quot;attribute&quot;&gt;margin&lt;/span&gt;:&lt;span class=&quot;value&quot;&gt; &lt;span class=&quot;number&quot;&gt;3&lt;/span&gt;em &lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;;&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&quot;rule&quot;&gt;}&lt;/span&gt;&lt;/span&gt;
+
+&lt;span class=&quot;tag&quot;&gt;footer&lt;/span&gt; &lt;span class=&quot;class&quot;&gt;.nav&lt;/span&gt; &lt;span class=&quot;rules&quot;&gt;{
+  &lt;span class=&quot;rule&quot;&gt;&lt;span class=&quot;attribute&quot;&gt;text-align&lt;/span&gt;:&lt;span class=&quot;value&quot;&gt; center;&lt;/span&gt;&lt;/span&gt;
+  &lt;span class=&quot;rule&quot;&gt;&lt;span class=&quot;attribute&quot;&gt;margin-top&lt;/span&gt;:&lt;span class=&quot;value&quot;&gt; &lt;span class=&quot;number&quot;&gt;5&lt;/span&gt;em;&lt;/span&gt;&lt;/span&gt;
+  &lt;span class=&quot;rule&quot;&gt;&lt;span class=&quot;attribute&quot;&gt;margin-bottom&lt;/span&gt;:&lt;span class=&quot;value&quot;&gt; &lt;span class=&quot;number&quot;&gt;3.5&lt;/span&gt;em;&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&quot;rule&quot;&gt;}&lt;/span&gt;&lt;/span&gt;
+
+&lt;span class=&quot;tag&quot;&gt;footer&lt;/span&gt; &lt;span class=&quot;class&quot;&gt;.nav&lt;/span&gt; &lt;span class=&quot;tag&quot;&gt;a&lt;/span&gt; &lt;span class=&quot;rules&quot;&gt;{
+  &lt;span class=&quot;rule&quot;&gt;&lt;span class=&quot;attribute&quot;&gt;padding&lt;/span&gt;:&lt;span class=&quot;value&quot;&gt; &lt;span class=&quot;number&quot;&gt;0&lt;/span&gt; &lt;span class=&quot;number&quot;&gt;0.5&lt;/span&gt;em;&lt;/span&gt;&lt;/span&gt;
+  &lt;span class=&quot;rule&quot;&gt;&lt;span class=&quot;attribute&quot;&gt;font-size&lt;/span&gt;:&lt;span class=&quot;value&quot;&gt; &lt;span class=&quot;number&quot;&gt;1.2&lt;/span&gt;em;&lt;/span&gt;&lt;/span&gt;
+  &lt;span class=&quot;rule&quot;&gt;&lt;span class=&quot;attribute&quot;&gt;text-decoration&lt;/span&gt;:&lt;span class=&quot;value&quot;&gt; none;&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&quot;rule&quot;&gt;}&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;No &lt;a href=&quot;http://lesscss.org/&quot;&gt;LESS&lt;/a&gt;:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;lang-css&quot;&gt;footer {
+    margin: 3em 0;
+
+    .nav {
+      text-align: center;
+      margin-top: 5em;
+      margin-bottom: 3.5em;
+
+      a {
+        padding: 0 0.5em;
+        font-size: 1.2em;
+        text-decoration: none;
+      }
+    }
+}&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Para as media queries, eu inseri diretamente nos contextos, para que ficasse mais facil o entendimento:&lt;/p&gt;
+&lt;p&gt;Como era no CSS:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;lang-css&quot;&gt;&lt;span class=&quot;at_rule&quot;&gt;@&lt;span class=&quot;keyword&quot;&gt;media&lt;/span&gt; (min-width: &lt;span class=&quot;number&quot;&gt;1600&lt;/span&gt;px) &lt;/span&gt;{
+  &lt;span class=&quot;tag&quot;&gt;body&lt;/span&gt; &lt;span class=&quot;rules&quot;&gt;{ &lt;span class=&quot;rule&quot;&gt;&lt;span class=&quot;attribute&quot;&gt;font-size&lt;/span&gt;:&lt;span class=&quot;value&quot;&gt; &lt;span class=&quot;number&quot;&gt;26&lt;/span&gt;px;&lt;/span&gt;&lt;/span&gt; &lt;span class=&quot;rule&quot;&gt;}&lt;/span&gt;&lt;/span&gt;
+}
+
+&lt;span class=&quot;at_rule&quot;&gt;@&lt;span class=&quot;keyword&quot;&gt;media&lt;/span&gt; (max-width: &lt;span class=&quot;number&quot;&gt;900&lt;/span&gt;px) &lt;/span&gt;{
+  &lt;span class=&quot;tag&quot;&gt;body&lt;/span&gt; &lt;span class=&quot;rules&quot;&gt;{ &lt;span class=&quot;rule&quot;&gt;&lt;span class=&quot;attribute&quot;&gt;font-size&lt;/span&gt;:&lt;span class=&quot;value&quot;&gt; &lt;span class=&quot;number&quot;&gt;18&lt;/span&gt;px;&lt;/span&gt;&lt;/span&gt; &lt;span class=&quot;rule&quot;&gt;}&lt;/span&gt;&lt;/span&gt;
+}&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;No &lt;a href=&quot;http://lesscss.org/&quot;&gt;LESS&lt;/a&gt;:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;lang-css&quot;&gt;body {
+  @media (min-width: 1600px) { font-size: 26px; }
+  @media (max-width: 900px) { font-size: 18px; }
+}&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;(Confesso que ai surgiu uma dúvida; Seria melhor separar por elemento as media queries, ou a media query deveria ser um contexto com a definição dos seus elementos?)&lt;/p&gt;
+&lt;p&gt;Para finalizar e aprender sobre os mixins, criei um arquivo “mixins.less” para armazenalos:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;lang-css&quot;&gt;&lt;span class=&quot;class&quot;&gt;.column-count&lt;/span&gt;(&lt;span class=&quot;at_rule&quot;&gt;@count: &lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;) &lt;/span&gt;{
+  -&lt;span class=&quot;tag&quot;&gt;webkit&lt;/span&gt;-&lt;span class=&quot;tag&quot;&gt;column&lt;/span&gt;-&lt;span class=&quot;tag&quot;&gt;count&lt;/span&gt;: &lt;span class=&quot;at_rule&quot;&gt;@count&lt;/span&gt;;
+  -&lt;span class=&quot;tag&quot;&gt;moz&lt;/span&gt;-&lt;span class=&quot;tag&quot;&gt;column&lt;/span&gt;-&lt;span class=&quot;tag&quot;&gt;count&lt;/span&gt;: &lt;span class=&quot;at_rule&quot;&gt;@count&lt;/span&gt;;
+  -&lt;span class=&quot;tag&quot;&gt;ms&lt;/span&gt;-&lt;span class=&quot;tag&quot;&gt;column&lt;/span&gt;-&lt;span class=&quot;tag&quot;&gt;count&lt;/span&gt;: &lt;span class=&quot;at_rule&quot;&gt;@count&lt;/span&gt;;
+  &lt;span class=&quot;tag&quot;&gt;column&lt;/span&gt;-&lt;span class=&quot;tag&quot;&gt;count&lt;/span&gt;: &lt;span class=&quot;at_rule&quot;&gt;@count&lt;/span&gt;;
+}
+
+&lt;span class=&quot;class&quot;&gt;.column-gap&lt;/span&gt;(&lt;span class=&quot;at_rule&quot;&gt;@gap: &lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;em) &lt;/span&gt;{
+  -&lt;span class=&quot;tag&quot;&gt;webkit&lt;/span&gt;-&lt;span class=&quot;tag&quot;&gt;column&lt;/span&gt;-&lt;span class=&quot;tag&quot;&gt;gap&lt;/span&gt;: &lt;span class=&quot;at_rule&quot;&gt;@gap&lt;/span&gt;;
+  -&lt;span class=&quot;tag&quot;&gt;moz&lt;/span&gt;-&lt;span class=&quot;tag&quot;&gt;column&lt;/span&gt;-&lt;span class=&quot;tag&quot;&gt;gap&lt;/span&gt;: &lt;span class=&quot;at_rule&quot;&gt;@gap&lt;/span&gt;;
+  -&lt;span class=&quot;tag&quot;&gt;ms&lt;/span&gt;-&lt;span class=&quot;tag&quot;&gt;column&lt;/span&gt;-&lt;span class=&quot;tag&quot;&gt;gap&lt;/span&gt;: &lt;span class=&quot;at_rule&quot;&gt;@gap&lt;/span&gt;;
+  &lt;span class=&quot;tag&quot;&gt;column&lt;/span&gt;-&lt;span class=&quot;tag&quot;&gt;gap&lt;/span&gt;: &lt;span class=&quot;at_rule&quot;&gt;@gap&lt;/span&gt;;
+}&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Estas funções ajudam muito para prever todos os prefixos proprietários!&lt;/p&gt;
+&lt;h3&gt;Acabamos&lt;/h3&gt;
+&lt;p&gt;Feito as alterações, bastou compilar tudo e correr pro abraço! O que aprendi hoje não foi tão aprofundado, pelo tempo corrido, mas espero que tenham gostado! Um abraço!&lt;/p&gt;
+&lt;p&gt;Todo o código atualizado está disponível no Github: &lt;a href=&quot;https://github.com/jr8116/oqueaprendihoje&quot;&gt;&lt;a href=&quot;https://github.com/jr8116/oqueaprendihoje&quot;&gt;https://github.com/jr8116/oqueaprendihoje&lt;/a&gt;&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
     <item>
       <title>Como criar um blog utilizando Wintersmith</title>
       <link>http://oqueaprendihoje.com.br/articles/como-criar-um-blog-usando-wintersmith/</link>
