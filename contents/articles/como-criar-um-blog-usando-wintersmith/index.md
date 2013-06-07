@@ -10,7 +10,7 @@ Já que o objetivo é compartilhar o aprendizado de todo dia, o primeiro artigo 
 <span class="more"></span>
 
 ### A Vontade
-A pouco tempo atrás, acompanhando o [Zofe 6][1], começei a dar atenção aos geradores de conteúdos estáticos como alternativa facilitadora ao desenvolvimento de sites que não necessitassem de paineis adiministrativos e etc., o que se encaixam nos padrões dos meus sites pessoais.
+A pouco tempo atrás, acompanhando o [Zofe 6][1], comecei a dar atenção aos geradores de conteúdos estáticos como alternativa facilitadora ao desenvolvimento de sites que não necessitassem de paineis adiministrativos e etc., o que se encaixa nos padrões dos meus sites pessoais.
 
 ### O que são os Geradores de Conteúdos Estáticos? (O que eu entendi)
 
@@ -18,7 +18,7 @@ Diferente de plataformas como Wordpress, Joomla e etc., os geradores de conteúd
 
 ### O [Wintersmith][6] [(código)][7]
 
-O porto de partida foi a escolha de qual gerador utilizar. Eu já possuia uma queda pelo [Jekyll][2] (devido à diversos blogs que eu acompanho o utilizarem) e uma lista de [32 Geradores de Conteúdo Estáticos][3], porem, eu não queria utilizar [Ruby][4] (simplesmente não queria) e decidi procurar algo em [Node.js][5], eis que surge o [Wintersmith][6]!
+O ponto de partida foi a escolha de qual gerador utilizar. Eu já possuia uma queda pelo [Jekyll][2] (devido à diversos blogs que eu acompanho o utilizarem) e uma lista de [32 Geradores de Conteúdo Estáticos][3], porem, eu não queria utilizar [Ruby][4] (simplesmente não queria) e decidi procurar algo em [Node.js][5], eis que surge o [Wintersmith][6]!
 
 O projeto [Wintersmith][6] MIT; É open-source e utiliza outros projetos open-source para criar um ambiente bem simples! Foi criado utilizando o [Markdown][8] como conversor de texto para HTML, [Jade][9] para criação de templates e [Coffescript][10] para os plugins! (Muita coisa legal para aprender!!)
 
