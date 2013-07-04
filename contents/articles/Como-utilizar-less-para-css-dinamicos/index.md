@@ -10,10 +10,10 @@ Sei que eu tinha escrito sobre utilizar o [Pure.css][1] na estilização do Blog
 <span class="more"></span>
 
 ### A motivação
-Sempre sofri na hora de escrever guias de estilos bem organizadas, otimizadas e redundantes, porem, quando eu achava que estava melhorando, surgiu o tal do [Design Responsivo][4] (O [link][4] é um artigo bem legal do [Tableless][7]), que me fez ficar ainda mais preocupado com estes arquivos .css, pois os escopos [@media][3] almentaram muito a quantidade de códigos; Por estes motivos, decidi aprender sobre o [LESS][2], a linguagem do css dinâmico (Existem outras opçõs, como o [SASS][5], porem, denovo, não queria usar [Ruby][6])!
+Sempre sofri na hora de escrever guias de estilos bem organizadas, otimizadas e redundantes, porem, quando eu achava que estava melhorando, surgiu o tal do [Design Responsivo][4] (O [link][4] é um artigo bem legal do [Tableless][7]), que me fez ficar ainda mais preocupado com estes arquivos .css, pois os escopos [@media][3] aumentaram muito a quantidade de códigos; Por estes motivos, decidi aprender sobre o [LESS][2], a linguagem do css dinâmico (Existem outras opções, como o [SASS][5], porem, de novo, não queria usar [Ruby][6])!
 
 ### O [LESS][2]
-O [LESS][2], que está na sua versão 1.4.0 beta, é uma linguagem que extende ao CSS o comportamento dinâmicos de variáveis, operações, mixins e funções; O legal da linguagem é que ela roda tanto em server-side (com o [Node.js][8] e [Rhino][9]) quanto client-side (apenas browsers modernos). Para instala-lo, basta ter o [Node.js][8] instalado e com o [npm][10] ativo:
+O [LESS][2], que está na sua versão 1.4.0 beta, é uma linguagem que estende ao CSS o comportamento dinâmicos de variáveis, operações, mixins e funções; O legal da linguagem é que ela roda tanto em server-side (com o [Node.js][8] e [Rhino][9]) quanto client-side (apenas browsers modernos). Para instala-lo, basta ter o [Node.js][8] instalado e com o [npm][10] ativo:
 
 ```
 npm install -g less
@@ -45,15 +45,15 @@ Criei um arquivo para as variaveis de cores (Ótimo para a reutilização):
 @a-hover-color: #ff8000;
 @hr-color: #d2d2d2;
 ```
-(Confesso que cometi um erro besta; Gerei o arquivo, fiz o import e fui para a visualização para ver o que aconteceu, só que nada aparecia, devido às variaveis não serem compiladas)
+(Confesso que cometi um erro besta; Gerei o arquivo, fiz o import e fui para a visualização para ver o que aconteceu, só que nada aparecia, devido às variáveis não serem compiladas)
 
 Depois, separei os estilos em contextos,  criando um conjunto de:
-	*	header.less
-	*	commons.less
-	*	footer.less
-	*	article.less
-	*	archive.less
-	*	code.less
+  * header.less
+  * commons.less
+  * footer.less
+  * article.less
+  * archive.less
+  * code.less
 
 Que serão ao final da implementação, importados no arquivo main.css:
 ```css
@@ -106,7 +106,7 @@ footer {
 }
 ```
 
-Para as media queries, eu inseri diretamente nos contextos, para que ficasse mais facil o entendimento:
+Para as media queries, eu inseri diretamente nos contextos, para que ficasse mais fácil o entendimento:
 
 Como era no CSS:
 ```css
@@ -129,7 +129,7 @@ body {
 
 (Confesso que ai surgiu uma dúvida; Seria melhor separar por elemento as media queries, ou a media query deveria ser um contexto com a definição dos seus elementos?)
 
-Para finalizar e aprender sobre os mixins, criei um arquivo "mixins.less" para armazenalos:
+Para finalizar e aprender sobre os mixins, criei um arquivo "mixins.less" para armazena-los:
 ```css
 .column-count(@count: 1) {
   -webkit-column-count: @count;

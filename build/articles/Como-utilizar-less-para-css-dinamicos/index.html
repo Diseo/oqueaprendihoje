@@ -8,7 +8,7 @@
     </title>
     <link rel="alternate" href="http://oqueaprendihoje.com.br/feed.xml" type="application/rss+xml" title="A saga de um aprendiz encantado com o universo do Front-end">
     <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic|Anonymous+Pro:400,700,400italic,700italic|Merriweather:400,700,300">
-    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="css/main.css">
     <script>
       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
       (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -33,9 +33,9 @@
           <section class="content"><p>Sei que eu tinha escrito sobre utilizar o <a href="http://purecss.io/">Pure.css</a> na estilização do Blog, porem, decidi fazer algo mais ousado do que utilizar uma biblioteca pronta! Decidi aprender <a href="http://lesscss.org/"><span class="caps">LESS</span></a>!</p>
 <p><span class="more"></span></p>
 <h3>A&nbsp;motivação</h3>
-<p>Sempre sofri na hora de escrever guias de estilos bem organizadas, otimizadas e redundantes, porem, quando eu achava que estava melhorando, surgiu o tal do <a href="http://tableless.com.br/design-responsivo-na-pratica-do-rascunho-ao-digita/">Design Responsivo</a> (O <a href="http://tableless.com.br/design-responsivo-na-pratica-do-rascunho-ao-digita/">link</a> é um artigo bem legal do <a href="http://tableless.com.br/">Tableless</a>), que me fez ficar ainda mais preocupado com estes arquivos .css, pois os escopos <a href="http://www.w3.org/TR/CSS2/media.html">@media</a> almentaram muito a quantidade de códigos; Por estes motivos, decidi aprender sobre o <a href="http://lesscss.org/"><span class="caps">LESS</span></a>, a linguagem do css dinâmico (Existem outras opçõs, como o <a href="http://sass-lang.com/"><span class="caps">SASS</span></a>, porem, denovo, não queria usar <a href="http://www.ruby-lang.org/">Ruby</a>)!</p>
+<p>Sempre sofri na hora de escrever guias de estilos bem organizadas, otimizadas e redundantes, porem, quando eu achava que estava melhorando, surgiu o tal do <a href="http://tableless.com.br/design-responsivo-na-pratica-do-rascunho-ao-digita/">Design Responsivo</a> (O <a href="http://tableless.com.br/design-responsivo-na-pratica-do-rascunho-ao-digita/">link</a> é um artigo bem legal do <a href="http://tableless.com.br/">Tableless</a>), que me fez ficar ainda mais preocupado com estes arquivos .css, pois os escopos <a href="http://www.w3.org/TR/CSS2/media.html">@media</a> aumentaram muito a quantidade de códigos; Por estes motivos, decidi aprender sobre o <a href="http://lesscss.org/"><span class="caps">LESS</span></a>, a linguagem do css dinâmico (Existem outras opções, como o <a href="http://sass-lang.com/"><span class="caps">SASS</span></a>, porem, de novo, não queria usar <a href="http://www.ruby-lang.org/">Ruby</a>)!</p>
 <h3>O <a href="http://lesscss.org/"><span class="caps">LESS</span></a></h3>
-<p>O <a href="http://lesscss.org/"><span class="caps">LESS</span></a>, que está na sua versão 1.4.0 beta, é uma linguagem que extende ao <span class="caps">CSS</span> o comportamento dinâmicos de variáveis, operações, mixins e funções; O legal da linguagem é que ela roda tanto em server-side (com o <a href="http://nodejs.org/">Node.js</a> e <a href="https://developer.mozilla.org/en-US/docs/Rhino">Rhino</a>) quanto client-side (apenas browsers modernos). Para instala-lo, basta ter o <a href="http://nodejs.org/">Node.js</a> instalado e com o <a href="https://npmjs.org/">npm</a>&nbsp;ativo:</p>
+<p>O <a href="http://lesscss.org/"><span class="caps">LESS</span></a>, que está na sua versão 1.4.0 beta, é uma linguagem que estende ao <span class="caps">CSS</span> o comportamento dinâmicos de variáveis, operações, mixins e funções; O legal da linguagem é que ela roda tanto em server-side (com o <a href="http://nodejs.org/">Node.js</a> e <a href="https://developer.mozilla.org/en-US/docs/Rhino">Rhino</a>) quanto client-side (apenas browsers modernos). Para instala-lo, basta ter o <a href="http://nodejs.org/">Node.js</a> instalado e com o <a href="https://npmjs.org/">npm</a>&nbsp;ativo:</p>
 <pre><code>npm install -g less</code></pre>
 <h3><a href="http://lesscss.org/"><span class="caps">LESS</span></a> no <a href="http://wintersmith.io/">Wintersmith</a></h3>
 <p>Como o blog foi criado com o <a href="http://wintersmith.io/">Wintersmith</a> (se quiser saber como, <a href="/articles/como-criar-um-blog-usando-wintersmith/">leia aqui</a>), utilizei o <a href="https://github.com/jnordberg/wintersmith-less">plugin</a> do Johan Nordberg que já faz todo o trabalho de integrar as duas belezinhas. Olha o quanto é&nbsp;fácil:</p>
@@ -52,14 +52,14 @@ $ npm install wintersmith-less -g</code></pre>
 <span class="at_rule">@body-text-color: #<span class="number">171717</span></span>;
 <span class="at_rule">@a-hover-color: #ff8000</span>;
 <span class="at_rule">@hr-color: #d2d2d2</span>;</code></pre>
-<p>(Confesso que cometi um erro besta; Gerei o arquivo, fiz o import e fui para a visualização para ver o que aconteceu, só que nada aparecia, devido às variaveis não serem&nbsp;compiladas)</p>
+<p>(Confesso que cometi um erro besta; Gerei o arquivo, fiz o import e fui para a visualização para ver o que aconteceu, só que nada aparecia, devido às variáveis não serem&nbsp;compiladas)</p>
 <p>Depois, separei os estilos em contextos,  criando um conjunto de:
-    <em>    header.less
-    </em>    commons.less
-    <em>    footer.less
-    </em>    article.less
-    <em>    archive.less
-    </em>&nbsp;code.less</p>
+  <em> header.less
+  </em> commons.less
+  <em> footer.less
+  </em> article.less
+  <em> archive.less
+  </em>&nbsp;code.less</p>
 <p>Que serão ao final da implementação, importados no arquivo&nbsp;main.css:</p>
 <pre><code class="lang-css"><span class="at_rule">@<span class="keyword">import</span> <span class="string">"colors"</span></span>;
 <span class="at_rule">@<span class="keyword">import</span> <span class="string">"functions"</span></span>;
@@ -69,7 +69,7 @@ $ npm install wintersmith-less -g</code></pre>
 <span class="at_rule">@<span class="keyword">import</span> <span class="string">"article"</span></span>;
 <span class="at_rule">@<span class="keyword">import</span> <span class="string">"archive"</span></span>;
 <span class="at_rule">@<span class="keyword">import</span> <span class="string">"code"</span></span>;</code></pre>
-<p>Uma das coisas mais divertidas do <a href="http://lesscss.org/"><span class="caps">LESS</span></a> é poder usar o encascateamento de códigos, o que economiza bastante código e facilita o entendimento do escopo, como o exemplo&nbsp;abaixo:</p>
+<p>Uma das coisas mais divertidas do <a href="http://lesscss.org/"><span class="caps">LESS</span></a> é poder usar o encadeamento de códigos, o que economiza bastante código e facilita o entendimento do escopo, como o exemplo&nbsp;abaixo:</p>
 <p>No&nbsp;css:</p>
 <pre><code class="lang-css"><span class="tag">footer</span> <span class="rules">{
   <span class="rule"><span class="attribute">margin</span>:<span class="value"> <span class="number">3</span>em <span class="number">0</span>;</span></span>
@@ -102,7 +102,7 @@ $ npm install wintersmith-less -g</code></pre>
       }
     }
 }</code></pre>
-<p>Para as media queries, eu inseri diretamente nos contextos, para que ficasse mais facil o&nbsp;entendimento:</p>
+<p>Para as media queries, eu inseri diretamente nos contextos, para que ficasse mais fácil o&nbsp;entendimento:</p>
 <p>Como era no&nbsp;<span class="caps">CSS</span>:</p>
 <pre><code class="lang-css"><span class="at_rule">@<span class="keyword">media</span> (min-width: <span class="number">1600</span>px) </span>{
   <span class="tag">body</span> <span class="rules">{ <span class="rule"><span class="attribute">font-size</span>:<span class="value"> <span class="number">26</span>px;</span></span> <span class="rule">}</span></span>
@@ -117,7 +117,7 @@ $ npm install wintersmith-less -g</code></pre>
   @media (max-width: 900px) { font-size: 18px; }
 }</code></pre>
 <p>(Confesso que ai surgiu uma dúvida; Seria melhor separar por elemento as media queries, ou a media query deveria ser um contexto com a definição dos seus&nbsp;elementos?)</p>
-<p>Para finalizar e aprender sobre os mixins, criei um arquivo “mixins.less” para&nbsp;armazenalos:</p>
+<p>Para finalizar e aprender sobre os mixins, criei um arquivo “mixins.less” para&nbsp;armazena-los:</p>
 <pre><code class="lang-css"><span class="class">.column-count</span>(<span class="at_rule">@count: <span class="number">1</span>) </span>{
   -<span class="tag">webkit</span>-<span class="tag">column</span>-<span class="tag">count</span>: <span class="at_rule">@count</span>;
   -<span class="tag">moz</span>-<span class="tag">column</span>-<span class="tag">count</span>: <span class="at_rule">@count</span>;

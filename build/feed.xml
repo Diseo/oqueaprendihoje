@@ -5,21 +5,100 @@
     <atom:link href="http://oqueaprendihoje.com.br/feed.xml" rel="self" type="application/rss+xml"></atom:link>
     <link>http://oqueaprendihoje.com.br</link>
     <description>A saga de um aprendiz encantado com o universo do Front-end</description>
-    <pubDate>Fri, 07 Jun 2013 10:25:00 -0300</pubDate>
+    <pubDate>Thu, 04 Jul 2013 10:00:00 -0300</pubDate>
     <generator>Wintersmith - https://github.com/jnordberg/wintersmith</generator>
     <language>en</language>
     <item>
+      <title>Como criar uma Aplicação Express com Node</title>
+      <link>http://oqueaprendihoje.com.br/articles/como-criar-uma-aplicacao-express-com-node/</link>
+      <pubDate>Thu, 04 Jul 2013 10:00:00 -0300</pubDate>
+      <guid isPermaLink="true">http://oqueaprendihoje.com.br/articles/como-criar-uma-aplicacao-express-com-node/</guid>
+      <author></author>
+      <description>&lt;p&gt;Com usuários cada vez mais exigentes, as urls amigáveis se tornaram quase que uma premissa para aplicações Web de sucesso. Para implementa-las, existem várias alternativas, desde configurações no servidor de aplicação à controle de url via javascript. Hoje, eu aprendi a implementa-las a partir do &lt;a href=&quot;http://expressjs.com/&quot;&gt;Express&lt;/a&gt; do &lt;a href=&quot;http://nodejs.org/&quot;&gt;Node.js&lt;/a&gt;.
+&lt;span class=&quot;more&quot;&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;h3&gt;O que é o &lt;a href=&quot;http://expressjs.com/&quot;&gt;Express&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;O &lt;a href=&quot;http://expressjs.com/&quot;&gt;Express&lt;/a&gt; é um framework de aplicações web para &lt;a href=&quot;http://nodejs.org/&quot;&gt;Node.js&lt;/a&gt; que provê um robusto leque de funcionalidades para construir simples ou múltiplas páginas, além de aplicações web híbridas. Ah! ele é inspirado no &lt;a href=&quot;http://www.sinatrarb.com/&quot;&gt;Sinatra&lt;/a&gt;. 
+Apesar de o &lt;a href=&quot;http://expressjs.com/&quot;&gt;Express&lt;/a&gt; ser muito mais que um sistema de roteamento, esta será a funcionalidade estudada.&lt;/p&gt;
+&lt;h3&gt;Instalando o &lt;a href=&quot;http://expressjs.com/&quot;&gt;Express&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;O &lt;a href=&quot;http://expressjs.com/&quot;&gt;Express&lt;/a&gt; pode ser instalado via &lt;a href=&quot;https://npmjs.org/&quot;&gt;npm&lt;/a&gt;, através do comando:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;npm install express&lt;/code&gt;&lt;/pre&gt;
+&lt;h3&gt;Criando a primeira aplicação&lt;/h3&gt;
+&lt;p&gt;Como exemplo de aplicação, criarei um sistema de rotas para escrever o a rota escolhida na tela, além de prever os exceções de rotas não informadas ou rotas desconhecidas.&lt;/p&gt;
+&lt;h3&gt;Construindo a aplicação&lt;/h3&gt;
+&lt;p&gt;Para iniciar a aplicação, precisaremos criar um arquivo .js , importar o modulo &lt;a href=&quot;http://expressjs.com/&quot;&gt;express&lt;/a&gt; e criar um aplicativo:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;var express = require(&amp;#39;express&amp;#39;), 
+       app = express();&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Com a aplicação criada, já podemos estabelecer os controles de rotas, através do método &lt;a href=&quot;http://expressjs.com/api.html#app.get&quot;&gt;.get&lt;/a&gt; do &lt;a href=&quot;http://expressjs.com/&quot;&gt;Express&lt;/a&gt;, que recebe como parâmetros um caminho (string ou expressão regular) e uma função de callback. A primeira rota criada, procurará um nome informado para exibir:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;app.get(&amp;#39;/rotas/:fruit?&amp;#39;,function(req, res, next){
+    var fruit = req.params.fruit;
+    switch(fruit){
+        case &amp;#39;pera&amp;#39;:
+        case &amp;#39;uva&amp;#39;:
+            res.send(&amp;#39;Fruta definida: &amp;#39; + fruit);
+            break;
+        default:
+            next();
+    }
+});&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Explicando:
++ O caminho informado, procura uma variável (:fruit) opcional (?) no caminho especificado “(endereço)/rotas/”;
++ A função de callback, possui três parâmetros, sendo o primeiro as &lt;a href=&quot;http://expressjs.com/api.html#req.params&quot;&gt;informações da requisição&lt;/a&gt;, o segundo o &lt;a href=&quot;http://expressjs.com/api.html#res.status&quot;&gt;objeto de resposta&lt;/a&gt; e o terceiro e mágico atributo, a função next (vou explicar…);
++ O objeto “req” trará entre outras informações, as ocorrências encontradas no objeto filho “params”;
++ O objeto “res” corresponde à resposta da requisição atual, onde o método “.send” envia uma mensagem ao ouvinte;
++ A função next força o &lt;a href=&quot;http://expressjs.com/&quot;&gt;Express&lt;/a&gt; a processar a próxima rota correspondente a solicitação atual.&lt;/p&gt;
+&lt;p&gt;Como caminho de exceção, criaremos uma rota para interceptar toda ocorrência diferente da esperada:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;app.get(&amp;#39;/rotas/*?&amp;#39;, function(req,res){
+    res.send(&amp;#39;Nada foi informado.&amp;#39;);
+});&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;E também uma resposta caso o usuário não acesse a raiz da aplicação:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;app.get(&amp;#39;/*?&amp;#39;, function(req,res){
+    res.send(&amp;#39;As rotas são respondidas apenas em /rotas/&amp;#39;);
+});&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Para finalizar, precisamos instruir a aplicação a escutar em alguma porta:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;var port = 3000;
+app.listen(port);&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Pronto, agora, basta rodar a aplicação e se divertir com ela! Recomendo dar uma olhada na &lt;a href=&quot;http://expressjs.com/api.html&quot;&gt;documentação&lt;/a&gt; do &lt;a href=&quot;http://expressjs.com/&quot;&gt;Express&lt;/a&gt;, lá tem muita coisa interessante. Abaixo, segue o código completo:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;var express = require(&amp;#39;express&amp;#39;);
+app = express();
+
+app.get(&amp;#39;/rotas/:fruit?&amp;#39;,function(req, res, next){
+    var fruit = req.params.fruit;
+    switch(fruit){
+        case &amp;#39;pera&amp;#39;:
+        case &amp;#39;uva&amp;#39;:
+            res.send(&amp;#39;Fruta definida: &amp;#39; + fruit);
+            break;
+        default:
+            next();
+    }
+});
+
+app.get(&amp;#39;/rotas/*?&amp;#39;, function(req,res){
+    res.send(&amp;#39;Nada foi informado.&amp;#39;);
+});
+
+app.get(&amp;#39;/?&amp;#39;, function(req,res){
+    res.send(&amp;#39;As rotas são respondidas apenas em /rotas/&amp;#39;);
+});
+
+var port = 3000;
+app.listen(port);&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Caso queira apreciar algumas aplicações utilizando o Express, basta clicar &lt;a href=&quot;http://expressjs.com/applications.html&quot;&gt;neste link&lt;/a&gt;.
+Mais uma vez obrigado, e desta vez tentarei voltar com uma frequência maior de postagens.&lt;/p&gt;
+</description>
+    </item>
+    <item>
       <title>Como utilizar LESS para CSS Dinâmicos</title>
-      <link>http://oqueaprendihoje.com.br/articles/Como-utilizar-less-para-css-dinamicos/</link>
+      <link>http://oqueaprendihoje.com.br/articles/como-utilizar-less-para-css-dinamicos/</link>
       <pubDate>Fri, 07 Jun 2013 10:25:00 -0300</pubDate>
-      <guid isPermaLink="true">http://oqueaprendihoje.com.br/articles/Como-utilizar-less-para-css-dinamicos/</guid>
+      <guid isPermaLink="true">http://oqueaprendihoje.com.br/articles/como-utilizar-less-para-css-dinamicos/</guid>
       <author></author>
       <description>&lt;p&gt;Sei que eu tinha escrito sobre utilizar o &lt;a href=&quot;http://purecss.io/&quot;&gt;Pure.css&lt;/a&gt; na estilização do Blog, porem, decidi fazer algo mais ousado do que utilizar uma biblioteca pronta! Decidi aprender &lt;a href=&quot;http://lesscss.org/&quot;&gt;LESS&lt;/a&gt;!&lt;/p&gt;
 &lt;p&gt;&lt;span class=&quot;more&quot;&gt;&lt;/span&gt;&lt;/p&gt;
 &lt;h3&gt;A motivação&lt;/h3&gt;
-&lt;p&gt;Sempre sofri na hora de escrever guias de estilos bem organizadas, otimizadas e redundantes, porem, quando eu achava que estava melhorando, surgiu o tal do &lt;a href=&quot;http://tableless.com.br/design-responsivo-na-pratica-do-rascunho-ao-digita/&quot;&gt;Design Responsivo&lt;/a&gt; (O &lt;a href=&quot;http://tableless.com.br/design-responsivo-na-pratica-do-rascunho-ao-digita/&quot;&gt;link&lt;/a&gt; é um artigo bem legal do &lt;a href=&quot;http://tableless.com.br/&quot;&gt;Tableless&lt;/a&gt;), que me fez ficar ainda mais preocupado com estes arquivos .css, pois os escopos &lt;a href=&quot;http://www.w3.org/TR/CSS2/media.html&quot;&gt;@media&lt;/a&gt; almentaram muito a quantidade de códigos; Por estes motivos, decidi aprender sobre o &lt;a href=&quot;http://lesscss.org/&quot;&gt;LESS&lt;/a&gt;, a linguagem do css dinâmico (Existem outras opçõs, como o &lt;a href=&quot;http://sass-lang.com/&quot;&gt;SASS&lt;/a&gt;, porem, denovo, não queria usar &lt;a href=&quot;http://www.ruby-lang.org/&quot;&gt;Ruby&lt;/a&gt;)!&lt;/p&gt;
+&lt;p&gt;Sempre sofri na hora de escrever guias de estilos bem organizadas, otimizadas e redundantes, porem, quando eu achava que estava melhorando, surgiu o tal do &lt;a href=&quot;http://tableless.com.br/design-responsivo-na-pratica-do-rascunho-ao-digita/&quot;&gt;Design Responsivo&lt;/a&gt; (O &lt;a href=&quot;http://tableless.com.br/design-responsivo-na-pratica-do-rascunho-ao-digita/&quot;&gt;link&lt;/a&gt; é um artigo bem legal do &lt;a href=&quot;http://tableless.com.br/&quot;&gt;Tableless&lt;/a&gt;), que me fez ficar ainda mais preocupado com estes arquivos .css, pois os escopos &lt;a href=&quot;http://www.w3.org/TR/CSS2/media.html&quot;&gt;@media&lt;/a&gt; aumentaram muito a quantidade de códigos; Por estes motivos, decidi aprender sobre o &lt;a href=&quot;http://lesscss.org/&quot;&gt;LESS&lt;/a&gt;, a linguagem do css dinâmico (Existem outras opções, como o &lt;a href=&quot;http://sass-lang.com/&quot;&gt;SASS&lt;/a&gt;, porem, de novo, não queria usar &lt;a href=&quot;http://www.ruby-lang.org/&quot;&gt;Ruby&lt;/a&gt;)!&lt;/p&gt;
 &lt;h3&gt;O &lt;a href=&quot;http://lesscss.org/&quot;&gt;LESS&lt;/a&gt;&lt;/h3&gt;
-&lt;p&gt;O &lt;a href=&quot;http://lesscss.org/&quot;&gt;LESS&lt;/a&gt;, que está na sua versão 1.4.0 beta, é uma linguagem que extende ao CSS o comportamento dinâmicos de variáveis, operações, mixins e funções; O legal da linguagem é que ela roda tanto em server-side (com o &lt;a href=&quot;http://nodejs.org/&quot;&gt;Node.js&lt;/a&gt; e &lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Rhino&quot;&gt;Rhino&lt;/a&gt;) quanto client-side (apenas browsers modernos). Para instala-lo, basta ter o &lt;a href=&quot;http://nodejs.org/&quot;&gt;Node.js&lt;/a&gt; instalado e com o &lt;a href=&quot;https://npmjs.org/&quot;&gt;npm&lt;/a&gt; ativo:&lt;/p&gt;
+&lt;p&gt;O &lt;a href=&quot;http://lesscss.org/&quot;&gt;LESS&lt;/a&gt;, que está na sua versão 1.4.0 beta, é uma linguagem que estende ao CSS o comportamento dinâmicos de variáveis, operações, mixins e funções; O legal da linguagem é que ela roda tanto em server-side (com o &lt;a href=&quot;http://nodejs.org/&quot;&gt;Node.js&lt;/a&gt; e &lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Rhino&quot;&gt;Rhino&lt;/a&gt;) quanto client-side (apenas browsers modernos). Para instala-lo, basta ter o &lt;a href=&quot;http://nodejs.org/&quot;&gt;Node.js&lt;/a&gt; instalado e com o &lt;a href=&quot;https://npmjs.org/&quot;&gt;npm&lt;/a&gt; ativo:&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;npm install -g less&lt;/code&gt;&lt;/pre&gt;
 &lt;h3&gt;&lt;a href=&quot;http://lesscss.org/&quot;&gt;LESS&lt;/a&gt; no &lt;a href=&quot;http://wintersmith.io/&quot;&gt;Wintersmith&lt;/a&gt;&lt;/h3&gt;
 &lt;p&gt;Como o blog foi criado com o &lt;a href=&quot;http://wintersmith.io/&quot;&gt;Wintersmith&lt;/a&gt; (se quiser saber como, &lt;a href=&quot;http://oqueaprendihoje.com.br/articles/como-criar-um-blog-usando-wintersmith/&quot;&gt;leia aqui&lt;/a&gt;), utilizei o &lt;a href=&quot;https://github.com/jnordberg/wintersmith-less&quot;&gt;plugin&lt;/a&gt; do Johan Nordberg que já faz todo o trabalho de integrar as duas belezinhas. Olha o quanto é fácil:&lt;/p&gt;
@@ -36,14 +115,14 @@ $ npm install wintersmith-less -g&lt;/code&gt;&lt;/pre&gt;
 &lt;span class=&quot;at_rule&quot;&gt;@body-text-color: #&lt;span class=&quot;number&quot;&gt;171717&lt;/span&gt;&lt;/span&gt;;
 &lt;span class=&quot;at_rule&quot;&gt;@a-hover-color: #ff8000&lt;/span&gt;;
 &lt;span class=&quot;at_rule&quot;&gt;@hr-color: #d2d2d2&lt;/span&gt;;&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;(Confesso que cometi um erro besta; Gerei o arquivo, fiz o import e fui para a visualização para ver o que aconteceu, só que nada aparecia, devido às variaveis não serem compiladas)&lt;/p&gt;
+&lt;p&gt;(Confesso que cometi um erro besta; Gerei o arquivo, fiz o import e fui para a visualização para ver o que aconteceu, só que nada aparecia, devido às variáveis não serem compiladas)&lt;/p&gt;
 &lt;p&gt;Depois, separei os estilos em contextos,  criando um conjunto de:
-    &lt;em&gt;    header.less
-    &lt;/em&gt;    commons.less
-    &lt;em&gt;    footer.less
-    &lt;/em&gt;    article.less
-    &lt;em&gt;    archive.less
-    &lt;/em&gt;    code.less&lt;/p&gt;
+  &lt;em&gt; header.less
+  &lt;/em&gt; commons.less
+  &lt;em&gt; footer.less
+  &lt;/em&gt; article.less
+  &lt;em&gt; archive.less
+  &lt;/em&gt; code.less&lt;/p&gt;
 &lt;p&gt;Que serão ao final da implementação, importados no arquivo main.css:&lt;/p&gt;
 &lt;pre&gt;&lt;code class=&quot;lang-css&quot;&gt;&lt;span class=&quot;at_rule&quot;&gt;@&lt;span class=&quot;keyword&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;string&quot;&gt;&quot;colors&quot;&lt;/span&gt;&lt;/span&gt;;
 &lt;span class=&quot;at_rule&quot;&gt;@&lt;span class=&quot;keyword&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;string&quot;&gt;&quot;functions&quot;&lt;/span&gt;&lt;/span&gt;;
@@ -53,7 +132,7 @@ $ npm install wintersmith-less -g&lt;/code&gt;&lt;/pre&gt;
 &lt;span class=&quot;at_rule&quot;&gt;@&lt;span class=&quot;keyword&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;string&quot;&gt;&quot;article&quot;&lt;/span&gt;&lt;/span&gt;;
 &lt;span class=&quot;at_rule&quot;&gt;@&lt;span class=&quot;keyword&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;string&quot;&gt;&quot;archive&quot;&lt;/span&gt;&lt;/span&gt;;
 &lt;span class=&quot;at_rule&quot;&gt;@&lt;span class=&quot;keyword&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;string&quot;&gt;&quot;code&quot;&lt;/span&gt;&lt;/span&gt;;&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Uma das coisas mais divertidas do &lt;a href=&quot;http://lesscss.org/&quot;&gt;LESS&lt;/a&gt; é poder usar o encascateamento de códigos, o que economiza bastante código e facilita o entendimento do escopo, como o exemplo abaixo:&lt;/p&gt;
+&lt;p&gt;Uma das coisas mais divertidas do &lt;a href=&quot;http://lesscss.org/&quot;&gt;LESS&lt;/a&gt; é poder usar o encadeamento de códigos, o que economiza bastante código e facilita o entendimento do escopo, como o exemplo abaixo:&lt;/p&gt;
 &lt;p&gt;No css:&lt;/p&gt;
 &lt;pre&gt;&lt;code class=&quot;lang-css&quot;&gt;&lt;span class=&quot;tag&quot;&gt;footer&lt;/span&gt; &lt;span class=&quot;rules&quot;&gt;{
   &lt;span class=&quot;rule&quot;&gt;&lt;span class=&quot;attribute&quot;&gt;margin&lt;/span&gt;:&lt;span class=&quot;value&quot;&gt; &lt;span class=&quot;number&quot;&gt;3&lt;/span&gt;em &lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;;&lt;/span&gt;&lt;/span&gt;
@@ -86,7 +165,7 @@ $ npm install wintersmith-less -g&lt;/code&gt;&lt;/pre&gt;
       }
     }
 }&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Para as media queries, eu inseri diretamente nos contextos, para que ficasse mais facil o entendimento:&lt;/p&gt;
+&lt;p&gt;Para as media queries, eu inseri diretamente nos contextos, para que ficasse mais fácil o entendimento:&lt;/p&gt;
 &lt;p&gt;Como era no CSS:&lt;/p&gt;
 &lt;pre&gt;&lt;code class=&quot;lang-css&quot;&gt;&lt;span class=&quot;at_rule&quot;&gt;@&lt;span class=&quot;keyword&quot;&gt;media&lt;/span&gt; (min-width: &lt;span class=&quot;number&quot;&gt;1600&lt;/span&gt;px) &lt;/span&gt;{
   &lt;span class=&quot;tag&quot;&gt;body&lt;/span&gt; &lt;span class=&quot;rules&quot;&gt;{ &lt;span class=&quot;rule&quot;&gt;&lt;span class=&quot;attribute&quot;&gt;font-size&lt;/span&gt;:&lt;span class=&quot;value&quot;&gt; &lt;span class=&quot;number&quot;&gt;26&lt;/span&gt;px;&lt;/span&gt;&lt;/span&gt; &lt;span class=&quot;rule&quot;&gt;}&lt;/span&gt;&lt;/span&gt;
@@ -101,7 +180,7 @@ $ npm install wintersmith-less -g&lt;/code&gt;&lt;/pre&gt;
   @media (max-width: 900px) { font-size: 18px; }
 }&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;(Confesso que ai surgiu uma dúvida; Seria melhor separar por elemento as media queries, ou a media query deveria ser um contexto com a definição dos seus elementos?)&lt;/p&gt;
-&lt;p&gt;Para finalizar e aprender sobre os mixins, criei um arquivo “mixins.less” para armazenalos:&lt;/p&gt;
+&lt;p&gt;Para finalizar e aprender sobre os mixins, criei um arquivo “mixins.less” para armazena-los:&lt;/p&gt;
 &lt;pre&gt;&lt;code class=&quot;lang-css&quot;&gt;&lt;span class=&quot;class&quot;&gt;.column-count&lt;/span&gt;(&lt;span class=&quot;at_rule&quot;&gt;@count: &lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;) &lt;/span&gt;{
   -&lt;span class=&quot;tag&quot;&gt;webkit&lt;/span&gt;-&lt;span class=&quot;tag&quot;&gt;column&lt;/span&gt;-&lt;span class=&quot;tag&quot;&gt;count&lt;/span&gt;: &lt;span class=&quot;at_rule&quot;&gt;@count&lt;/span&gt;;
   -&lt;span class=&quot;tag&quot;&gt;moz&lt;/span&gt;-&lt;span class=&quot;tag&quot;&gt;column&lt;/span&gt;-&lt;span class=&quot;tag&quot;&gt;count&lt;/span&gt;: &lt;span class=&quot;at_rule&quot;&gt;@count&lt;/span&gt;;

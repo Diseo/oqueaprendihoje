@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width">
+    <title>Como criar uma Aplicação Express com Node - O Que Aprendi Hoje
+    </title>
+    <link rel="alternate" href="http://oqueaprendihoje.com.br/feed.xml" type="application/rss+xml" title="A saga de um aprendiz encantado com o universo do Front-end">
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic|Anonymous+Pro:400,700,400italic,700italic|Merriweather:400,700,300">
+    <link rel="stylesheet" href="css/main.css">
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+      
+      ga('create', 'UA-41535019-1', 'oqueaprendihoje.com.br');
+      ga('send', 'pageview');
+    </script>
+  </head>
+  <body class="article-detail">
+    <header class="header">
+      <div class="content-wrap">
+        <h1>Como criar uma Aplicação Express com Node</h1>
+        <p class="author">Escrito por <span class="author"><a target="_blank" href="//twitter.com/_joaofelix">João Felix</a></span>
+        </p>
+      </div>
+    </header>
+    <div id="content">
+      <div class="content-wrap">
+        <article class="article">
+          <section class="content"><p>Com usuários cada vez mais exigentes, as urls amigáveis se tornaram quase que uma premissa para aplicações Web de sucesso. Para implementa-las, existem várias alternativas, desde configurações no servidor de aplicação à controle de url via javascript. Hoje, eu aprendi a implementa-las a partir do <a href="http://expressjs.com/">Express</a> do <a href="http://nodejs.org/">Node.js</a>.
+<span class="more"></span></p>
+<h3>O que é o <a href="http://expressjs.com/">Express</a></h3>
+<p>O <a href="http://expressjs.com/">Express</a> é um framework de aplicações web para <a href="http://nodejs.org/">Node.js</a> que provê um robusto leque de funcionalidades para construir simples ou múltiplas páginas, além de aplicações web híbridas. Ah! ele é inspirado no <a href="http://www.sinatrarb.com/">Sinatra</a>. 
+Apesar de o <a href="http://expressjs.com/">Express</a> ser muito mais que um sistema de roteamento, esta será a funcionalidade&nbsp;estudada.</p>
+<h3>Instalando o <a href="http://expressjs.com/">Express</a></h3>
+<p>O <a href="http://expressjs.com/">Express</a> pode ser instalado via <a href="https://npmjs.org/">npm</a>, através do&nbsp;comando:</p>
+<pre><code>npm install express</code></pre>
+<h3>Criando a primeira&nbsp;aplicação</h3>
+<p>Como exemplo de aplicação, criarei um sistema de rotas para escrever o a rota escolhida na tela, além de prever os exceções de rotas não informadas ou rotas&nbsp;desconhecidas.</p>
+<h3>Construindo a&nbsp;aplicação</h3>
+<p>Para iniciar a aplicação, precisaremos criar um arquivo .js , importar o modulo <a href="http://expressjs.com/">express</a> e criar um&nbsp;aplicativo:</p>
+<pre><code>var express = require(&#39;express&#39;), 
+       app = express();</code></pre>
+<p>Com a aplicação criada, já podemos estabelecer os controles de rotas, através do método <a href="http://expressjs.com/api.html#app.get">.get</a> do <a href="http://expressjs.com/">Express</a>, que recebe como parâmetros um caminho (string ou expressão regular) e uma função de callback. A primeira rota criada, procurará um nome informado para&nbsp;exibir:</p>
+<pre><code>app.get(&#39;/rotas/:fruit?&#39;,function(req, res, next){
+    var fruit = req.params.fruit;
+    switch(fruit){
+        case &#39;pera&#39;:
+        case &#39;uva&#39;:
+            res.send(&#39;Fruta definida: &#39; + fruit);
+            break;
+        default:
+            next();
+    }
+});</code></pre>
+<p>Explicando:
++ O caminho informado, procura uma variável (:fruit) opcional (?) no caminho especificado “(endereço)/rotas/”;
++ A função de callback, possui três parâmetros, sendo o primeiro as <a href="http://expressjs.com/api.html#req.params">informações da requisição</a>, o segundo o <a href="http://expressjs.com/api.html#res.status">objeto de resposta</a> e o terceiro e mágico atributo, a função next (vou explicar…);
++ O objeto “req” trará entre outras informações, as ocorrências encontradas no objeto filho “params”;
++ O objeto “res” corresponde à resposta da requisição atual, onde o método “.send” envia uma mensagem ao ouvinte;
++ A função next força o <a href="http://expressjs.com/">Express</a> a processar a próxima rota correspondente a solicitação&nbsp;atual.</p>
+<p>Como caminho de exceção, criaremos uma rota para interceptar toda ocorrência diferente da&nbsp;esperada:</p>
+<pre><code>app.get(&#39;/rotas/*?&#39;, function(req,res){
+    res.send(&#39;Nada foi informado.&#39;);
+});</code></pre>
+<p>E também uma resposta caso o usuário não acesse a raiz da&nbsp;aplicação:</p>
+<pre><code>app.get(&#39;/*?&#39;, function(req,res){
+    res.send(&#39;As rotas são respondidas apenas em /rotas/&#39;);
+});</code></pre>
+<p>Para finalizar, precisamos instruir a aplicação a escutar em alguma&nbsp;porta:</p>
+<pre><code>var port = 3000;
+app.listen(port);</code></pre>
+<p>Pronto, agora, basta rodar a aplicação e se divertir com ela! Recomendo dar uma olhada na <a href="http://expressjs.com/api.html">documentação</a> do <a href="http://expressjs.com/">Express</a>, lá tem muita coisa interessante. Abaixo, segue o código&nbsp;completo:</p>
+<pre><code>var express = require(&#39;express&#39;);
+app = express();
+
+app.get(&#39;/rotas/:fruit?&#39;,function(req, res, next){
+    var fruit = req.params.fruit;
+    switch(fruit){
+        case &#39;pera&#39;:
+        case &#39;uva&#39;:
+            res.send(&#39;Fruta definida: &#39; + fruit);
+            break;
+        default:
+            next();
+    }
+});
+
+app.get(&#39;/rotas/*?&#39;, function(req,res){
+    res.send(&#39;Nada foi informado.&#39;);
+});
+
+app.get(&#39;/?&#39;, function(req,res){
+    res.send(&#39;As rotas são respondidas apenas em /rotas/&#39;);
+});
+
+var port = 3000;
+app.listen(port);</code></pre>
+<p>Caso queira apreciar algumas aplicações utilizando o Express, basta clicar <a href="http://expressjs.com/applications.html">neste link</a>.
+Mais uma vez obrigado, e desta vez tentarei voltar com uma frequência maior de&nbsp;postagens.</p>
+</section>
+        </article>
+      </div>
+    </div>
+    <footer>
+      <div class="content-wrap">
+        <div class="addthis_toolbox addthis_default_style"><a fb:like:layout="button_count" class="addthis_button_facebook_like"></a><a class="addthis_button_tweet"></a><a class="addthis_counter addthis_pill_style"></a>
+          <script>var addthis_config = {"data_track_addressbar":true};</script>
+          <script src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-50f7680d30aa565f"></script>
+        </div>
+        <div id="disqus_thread"></div>
+        <script>
+          var disqus_shortname = "oqueaprendihoje";
+           (function() {
+               var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+               dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+               (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+           })();
+        </script>
+        <noscript>
+          <Habilite>o Javascript do seu browser para ver os</Habilite><a href="http://disqus.com/?ref_noscript">comentários mantidos pelo Disqus.</a>
+        </noscript><a href="http://disqus.com" class="dsq-brlink">
+          <comments>powered by</comments><span class="logo-disqus">
+            <Disqus></Disqus></span></a>
+        <div class="nav"><a href="/">« Lista</a></div>
+        <section class="about"><p>O objetivo deste blog é apenas devolver à internet um pouco do que aprendi com ela.</p>
+<p>Gostaria de se juntar a mim ou ver algum conteúdo especifico neste blog? Entre em <a href="mailto:jr8116@gmail.com">contato</a>, deixe comentários ou me ache no <a href="http://twitter.com/_joaofelix">twitter</a>!</p>
+
+        </section>
+        <section class="copy">
+          <p>&copy; 2013<a href="//twitter.com/_joaofelix" target="_blank"> João Felix</a>&mdash; powered by&nbsp;<a href="https://github.com/jnordberg/wintersmith">Wintersmith</a></p>
+        </section>
+      </div>
+    </footer>
+  </body>
+</html>
